@@ -65,7 +65,7 @@ def add(comment):
     # add all keywords
     else:
         for keyword in keywords:
-            if "notify_me_bot" in keyword:
+            if "notify_me_bot" in keyword or "create" in keyword or "all" in keyword:
                 continue
 
             out.append(keyword)
@@ -179,9 +179,12 @@ def check_keywords(item, lowercase_body, lowercase_title):
 
     reply = True
     # must contain all keywords
-    if item[2][0] == "all":
+    if "all" in item[2]:
 
-        for keyword in item[2][1:]:
+        for keyword in item[2]:
+            if "all" in keyword:
+                continue
+
             if keyword not in lowercase_body and keyword not in lowercase_title:
                 reply = False
                 break
@@ -192,6 +195,9 @@ def check_keywords(item, lowercase_body, lowercase_title):
         reply = False
 
         for keyword in item[2]:
+            if "all" in keyword:
+                continue
+
             if keyword in lowercase_body or keyword in lowercase_title:
                 reply = True
                 break
