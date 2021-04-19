@@ -153,11 +153,14 @@ Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_m
 
                     continue
 
-                keywords = add(comment)
-                comment.reply('''New search added:  
-                Subreddit: %s  
-                User: %s  
-                Keywords: %s  
+                if "create" in lowercase_body:
+
+                    keywords = add(comment)
+                    comment.reply('''New search added:  
+
+Subreddit: %s  
+User: %s  
+Keywords: %s  
 
 
 Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)''' % (comment.subreddit, comment.author, ", ".join(keywords)))
