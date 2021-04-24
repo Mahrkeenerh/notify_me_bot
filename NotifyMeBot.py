@@ -59,7 +59,7 @@ def add(comment):
         subreddit_list.append(str(comment.subreddit))
 
     # no keywords
-    if len(keywords) == 1:
+    if len(keywords) == 2:
         out.append("")
 
     # add all keywords
