@@ -65,7 +65,7 @@ def add(comment):
     # add all keywords
     else:
         for keyword in keywords:
-            if "notify_me_bot" in keyword or "create" in keyword or "all" in keyword:
+            if "notify_me_bot" in keyword or keyword == "create" or keyword ==  "all":
                 continue
 
             out.append(keyword)
@@ -103,7 +103,7 @@ def cancel(comment):
     else:
 
         for keyword in keywords:
-            if "notify_me_bot" in keyword or "cancel" in keyword:
+            if "notify_me_bot" in keyword or keyword == "cancel":
                 continue
 
             for item in watch_list:
