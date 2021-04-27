@@ -182,7 +182,7 @@ def check_keywords(item, lowercase_body, lowercase_title):
     if "all" in item[2]:
 
         for keyword in item[2]:
-            if "all" in keyword:
+            if keyword == "all":
                 continue
 
             if keyword not in lowercase_body and keyword not in lowercase_title:
@@ -195,8 +195,6 @@ def check_keywords(item, lowercase_body, lowercase_title):
         reply = False
 
         for keyword in item[2]:
-            if "all" in keyword:
-                continue
 
             if keyword in lowercase_body or keyword in lowercase_title:
                 reply = True
