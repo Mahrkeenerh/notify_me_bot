@@ -54,10 +54,6 @@ def add(comment):
     keywords = comment.body.lower().strip().split()
     out = []
 
-    # add new subreddit to search
-    if comment.subreddit not in subreddit_list:
-        subreddit_list.append(str(comment.subreddit))
-
     # no keywords
     if len(keywords) == 2:
         out.append("")
@@ -75,9 +71,15 @@ def add(comment):
     if out[0] == "":
         out = ["everything"]
 
+    # add new subreddit to search
+    if comment.subreddit not in subreddit_list:
+        subreddit_list.append(str(comment.subreddit))
+
+        # restart checking subreddits
+        Thread(target=check_subreddits, args=()).start()
+
     # save lists
     save()
-    Thread(target=check_subreddits, args=()).start()
     
     return out
 
@@ -88,7 +90,6 @@ def cancel(comment):
     global subreddit_list, watch_list
 
     keywords = comment.body.lower().strip().split()
-
     removed = 0
 
     # no keywords
@@ -116,9 +117,12 @@ def cancel(comment):
         if item not in [x[0] for x in watch_list]:
             subreddit_list.remove(item)
 
+            # restart checking subreddits
+            Thread(target=check_subreddits, args=()).start()
+            break
+
     # save lists
     save()
-    Thread(target=check_subreddits, args=()).start()
 
     return removed
 
