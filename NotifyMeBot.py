@@ -242,7 +242,7 @@ def check_subreddits():
                     for item in watch_list:
                         if item[0] == submission.subreddit:
 
-                            if check_keywords(item, lowercase_body, lowercase_title):
+                            if submission.author != item[1] and check_keywords(item, lowercase_body, lowercase_title):
 
                                 reddit.redditor(item[1]).message("notify_me_bot: %s" % (item[0]), '''You requested a notification, here is your post:  
                                 %s  
