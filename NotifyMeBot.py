@@ -131,15 +131,16 @@ def cancel(comment):
 def check_inbox():
 
     while True:
-        try: 
+        try:
+            print("Checking inbox")
             new_mentions = []
 
             for comment in reddit.inbox.all():
-                if not comment.new or "u/notify_me_bot" not in comment.body.lower():
-                    continue
-
                 new_mentions.append(comment)
                 lowercase_body = comment.body.lower()
+
+                if not comment.new or "u/notify_me_bot" not in lowercase_body:
+                    continue
 
                 if "cancel" in lowercase_body:
                     removed = cancel(comment)
@@ -212,6 +213,8 @@ def check_subreddits():
 
     while True:
         try:
+            print("Checking subreddits")
+
             # no search entries yet
             if not subreddit_list:
                 sleep(10)
