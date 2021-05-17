@@ -246,7 +246,7 @@ def check_subreddits():
 
                                 reddit.redditor(item[1]).message("notify_me_bot: %s" % (item[0]), '''You requested a notification, here is your post:  
                                 %s  
-                                To cancel subreddit notifications, comment in r/%s: u/notify_me_bot cancel''' % (submission.url, item[0]))
+                                To cancel subreddit notifications, comment in r/%s: u/notify_me_bot cancel''' % (submission.permalink, item[0]))
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
