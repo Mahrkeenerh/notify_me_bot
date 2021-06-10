@@ -178,7 +178,7 @@ Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_m
             print("\n", datetime.datetime.now())
             print("En error occured with inbox")
             print(sys.exc_info())
-            return
+            sleep(60)
 
 
 # check if bot should reply
