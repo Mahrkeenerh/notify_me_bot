@@ -132,6 +132,7 @@ def check_inbox():
 
     while True:
         try:
+            print("\nStarting inbox")
             new_mentions = []
 
             for comment in reddit.inbox.all():
@@ -174,6 +175,7 @@ Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_m
         # reddit is not responding or something, idk, error - wait, try again
         except:
 
+            print("\n", datetime.datetime.now())
             print("En error occured with inbox")
             print(sys.exc_info())
             return
@@ -213,6 +215,7 @@ def check_subreddits():
 
     while True:
         try:
+            print("\nStarting subreddits")
             # no search entries yet
             if not subreddit_list:
                 sleep(10)
@@ -249,6 +252,7 @@ def check_subreddits():
         # reddit is not responding or something, idk, error - wait, try again
         except:
 
+            print("\n", datetime.datetime.now())
             print("En error occured with subreddits")
             print(sys.exc_info())
             sleep(60)
