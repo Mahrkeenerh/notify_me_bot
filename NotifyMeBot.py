@@ -128,7 +128,6 @@ def check_inbox():
 
     while True:
         try:
-            print("\nStarting inbox")
             new_mentions = []
 
             for mention in reddit.inbox.all():
