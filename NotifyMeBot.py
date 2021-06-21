@@ -53,7 +53,7 @@ def add(mention, subreddit):
     out = []
 
     # no keywords
-    if len(keywords) == 2:
+    if len(keywords) < 3:
         out.append("")
 
     # add all keywords
@@ -91,7 +91,7 @@ def cancel(mention):
     removed = 0
 
     # no keywords
-    if len(keywords) == 2:
+    if len(keywords) < 3:
         for item in watch_list:
             if item[1] == mention.author and item[0] == mention.subreddit:
                 watch_list.remove(item)
@@ -138,7 +138,7 @@ def check_inbox():
                     continue
                 
                 # it's a response
-                if "u/notify_me_bot" not in lowercase_body:
+                if not ("u/notify_me_bot" in lowercase_body or mention.subject != "post reply"): 
                     continue
 
                 if "cancel" in lowercase_body:
