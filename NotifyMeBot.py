@@ -19,8 +19,6 @@ reddit = praw.Reddit(user_agent=userAgent,
     username=userN, 
     password=userP)
 
-subreddit = reddit.subreddit('MahrkeenerhTest+MahrkeenerhTest2')
-
 subreddit_list = []
 watch_list = []
 
@@ -47,11 +45,11 @@ def save():
 
 
 # add new entry to search_list
-def add(comment):
+def add(mention, subreddit):
 
     global subreddit_list, watch_list
 
-    keywords = comment.body.lower().strip().split()
+    keywords = mention.body.lower().strip().split()
     out = []
 
     # no keywords
@@ -66,14 +64,14 @@ def add(comment):
 
             out.append(keyword)
 
-    watch_list.append([str(comment.subreddit), str(comment.author), out])
+    watch_list.append([str(subreddit), str(mention.author), out])
 
     if out[0] == "":
         out = ["everything"]
 
     # add new subreddit to search
-    if comment.subreddit not in subreddit_list:
-        subreddit_list.append(str(comment.subreddit))
+    if subreddit not in subreddit_list:
+        subreddit_list.append(str(subreddit))
 
         # restart checking subreddits
         Thread(target=check_subreddits, args=()).start()
@@ -85,30 +83,28 @@ def add(comment):
 
 
 # cancel search
-def cancel(comment):
+def cancel(mention):
 
     global subreddit_list, watch_list
 
-    keywords = comment.body.lower().strip().split()
+    keywords = mention.body.lower().strip().split()
     removed = 0
 
     # no keywords
     if len(keywords) == 2:
-
         for item in watch_list:
-            if item[1] == comment.author and item[0] == comment.subreddit:
+            if item[1] == mention.author and item[0] == mention.subreddit:
                 watch_list.remove(item)
                 removed += 1
 
     # remove entry if it contains the keyword
     else:
-
         for keyword in keywords:
             if "notify_me_bot" in keyword or keyword == "cancel":
                 continue
 
             for item in watch_list:
-                if item[1] == comment.author and item[0] == comment.subreddit and keyword in item[2]:
+                if item[1] == mention.author and item[0] == mention.subreddit and keyword in item[2]:
                     watch_list.remove(item)
                     removed += 1
 
@@ -135,46 +131,40 @@ def check_inbox():
             print("\nStarting inbox")
             new_mentions = []
 
-            for comment in reddit.inbox.all():
-                new_mentions.append(comment)
-                lowercase_body = comment.body.lower()
+            for mention in reddit.inbox.all():
+                new_mentions.append(mention)
+                lowercase_body = mention.body.lower()
 
-                if not comment.new or "u/notify_me_bot" not in lowercase_body:
+                if not mention.new:
+                    continue
+                
+                # it's a response
+                if "u/notify_me_bot" not in lowercase_body:
                     continue
 
                 if "cancel" in lowercase_body:
-                    removed = cancel(comment)
+                    removed = cancel(mention)
                     if removed > 0:
-                        comment.reply('''Removed %d search listings.  
-
-
-Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)''' % (removed))
+                        mention.reply('Removed %d search listings.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' % (removed))
 
                     else:
-                        comment.reply('''No search listings were removed.  
-
-
-Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)''')
-
+                        mention.reply('No search listings were removed.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)')
                     continue
 
                 if "create" in lowercase_body:
+                    if mention.subject == "post reply":
+                        subreddit = mention.subreddit
+                    else:
+                        subreddit = mention.subject
 
-                    keywords = add(comment)
-                    comment.reply('''New search added:  
-
-Subreddit: %s  
-User: %s  
-Keywords: %s  
-
-
-Suggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)''' % (comment.subreddit, comment.author, ", ".join(keywords)))
+                    keywords = add(mention, subreddit)
+                    mention.reply('New search added:\n\nSubreddit: %s\nUser: %s\nKeywords: %s\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' 
+                        % (subreddit, mention.author, ", ".join(keywords)))
 
             reddit.inbox.mark_read(new_mentions)
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-
             print("\n", datetime.datetime.now())
             print("En error occured with inbox")
             print(sys.exc_info())
@@ -187,7 +177,6 @@ def check_keywords(item, lowercase_body, lowercase_title):
     reply = True
     # must contain all keywords
     if "all" in item[2]:
-
         for keyword in item[2]:
             if keyword == "all":
                 continue
@@ -198,11 +187,9 @@ def check_keywords(item, lowercase_body, lowercase_title):
     
     # must contain at least one keyword
     else:
-
         reply = False
 
         for keyword in item[2]:
-
             if keyword in lowercase_body or keyword in lowercase_title:
                 reply = True
                 break
@@ -226,7 +213,6 @@ def check_subreddits():
             start_time = datetime.datetime.now()
 
             for submission in subreddit.stream.submissions():
-
                 # something new was added - this thread is no longer needed
                 if "+".join(subreddit_list) != active_subreddit:
                     return
@@ -235,23 +221,17 @@ def check_subreddits():
 
                 # only check new posts
                 if submission_time > start_time:
-
                     lowercase_title = submission.title
                     lowercase_body = submission.selftext
 
                     # loop through all watch lists
                     for item in watch_list:
                         if item[0] == submission.subreddit:
-
                             if submission.author != item[1] and check_keywords(item, lowercase_body, lowercase_title):
-
-                                reddit.redditor(item[1]).message("notify_me_bot: %s" % (item[0]), '''You requested a notification, here is your post:  
-                                %s  
-                                To cancel subreddit notifications, comment in r/%s: u/notify_me_bot cancel''' % (submission.permalink, item[0]))
+                                reddit.redditor(item[1]).message('notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel subreddit notifications, comment in r/%s: u/notify_me_bot cancel' % (submission.permalink, item[0]))
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-
             print("\n", datetime.datetime.now())
             print("En error occured with subreddits")
             print(sys.exc_info())
