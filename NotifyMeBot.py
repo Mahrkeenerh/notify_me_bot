@@ -83,7 +83,7 @@ def add(mention, subreddit):
 
 
 # cancel search
-def cancel(mention):
+def cancel(mention, subreddit):
 
     global subreddit_list, watch_list
 
@@ -93,7 +93,7 @@ def cancel(mention):
     # no keywords
     if len(keywords) < 3:
         for item in watch_list:
-            if item[1] == mention.author and item[0] == mention.subreddit:
+            if item[1] == mention.author and item[0] == subreddit:
                 watch_list.remove(item)
                 removed += 1
 
@@ -104,7 +104,7 @@ def cancel(mention):
                 continue
 
             for item in watch_list:
-                if item[1] == mention.author and item[0] == mention.subreddit and keyword in item[2]:
+                if item[1] == mention.author and item[0] == subreddit and keyword in item[2]:
                     watch_list.remove(item)
                     removed += 1
 
@@ -121,6 +121,15 @@ def cancel(mention):
     save()
 
     return removed
+
+
+# return subreddit
+def get_subreddit(mention):
+
+    if mention.subject == "post reply":
+        return mention.subreddit
+
+    return mention.subject
 
 
 # check all mentions
@@ -141,8 +150,10 @@ def check_inbox():
                 if not ("u/notify_me_bot" in lowercase_body or mention.subject != "post reply"): 
                     continue
 
+                subreddit = get_subreddit(mention)
+
                 if "cancel" in lowercase_body:
-                    removed = cancel(mention)
+                    removed = cancel(mention, subreddit)
                     if removed > 0:
                         mention.reply('Removed %d search listings.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' % (removed))
 
@@ -151,11 +162,6 @@ def check_inbox():
                     continue
 
                 if "create" in lowercase_body:
-                    if mention.subject == "post reply":
-                        subreddit = mention.subreddit
-                    else:
-                        subreddit = mention.subject
-
                     keywords = add(mention, subreddit)
                     mention.reply('New search added:\n\nSubreddit: %s\nUser: %s\nKeywords: %s\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' 
                         % (subreddit, mention.author, ", ".join(keywords)))
