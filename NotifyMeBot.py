@@ -52,17 +52,16 @@ def add(mention, subreddit):
     keywords = mention.body.lower().strip().split()
     out = []
 
-    # no keywords
-    if len(keywords) < 3:
-        out.append("")
-
     # add all keywords
-    else:
-        for keyword in keywords:
-            if "notify_me_bot" in keyword or keyword == "create" or keyword ==  "all":
-                continue
+    for keyword in keywords:
+        if "notify_me_bot" in keyword or keyword == "create":
+            continue
 
-            out.append(keyword)
+        out.append(keyword)
+
+    # no keywords
+    if len(keywords) == 0 or (len(keywords) == 1 and keywords[0] == "all"):
+        out = [""]
 
     watch_list.append([str(subreddit), str(mention.author), out])
 
@@ -90,8 +89,16 @@ def cancel(mention, subreddit):
     keywords = mention.body.lower().strip().split()
     removed = 0
 
+    keywods_copy = []
+
+    for keyword in keywords:
+        if "notify_me_bot" in keyword or keyword == "cancel":
+            continue
+            
+        keywods_copy.append(keyword)
+
     # no keywords
-    if len(keywords) < 3:
+    if len(keywods_copy) == 0:
         for item in watch_list:
             if item[1] == mention.author and item[0] == subreddit:
                 watch_list.remove(item)
@@ -99,10 +106,7 @@ def cancel(mention, subreddit):
 
     # remove entry if it contains the keyword
     else:
-        for keyword in keywords:
-            if "notify_me_bot" in keyword or keyword == "cancel":
-                continue
-
+        for keyword in keywods_copy:
             for item in watch_list:
                 if item[1] == mention.author and item[0] == subreddit and keyword in item[2]:
                     watch_list.remove(item)
