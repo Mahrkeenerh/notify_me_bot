@@ -86,7 +86,7 @@ def add(mention, subreddit):
 # cancel search
 def cancel(mention, subreddit):
 
-    global subreddit_list, watch_list
+    global subreddit_list, watch_list, active_thread_id
 
     keywords = mention.body.lower().strip().split()
     removed = 0
