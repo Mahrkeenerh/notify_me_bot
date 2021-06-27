@@ -61,7 +61,7 @@ def add(mention, subreddit):
         out.append(keyword)
 
     # no keywords
-    if len(keywords) == 0 or (len(keywords) == 1 and keywords[0] == "all"):
+    if len(out) == 0 or (len(out) == 1 and out[0] == "all"):
         out = [""]
 
     watch_list.append([str(subreddit), str(mention.author), out])
