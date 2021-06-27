@@ -136,7 +136,7 @@ def get_subreddit(mention):
     if mention.subject == "post reply":
         return mention.subreddit
 
-    return mention.subject
+    return mention.subject.replace("re:", "").strip()
 
 
 # check all mentions
