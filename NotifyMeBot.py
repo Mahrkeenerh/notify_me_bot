@@ -170,7 +170,7 @@ def check_inbox():
 
                 if "create" in lowercase_body:
                     keywords = add(mention, subreddit)
-                    mention.reply('New search added:\n\nSubreddit: %s\nUser: %s\nKeywords: %s\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' 
+                    mention.reply('New search added:\n\nSubreddit: %s\n\nUser: %s\n\nKeywords: %s\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' 
                         % (subreddit, mention.author, ", ".join(keywords)))
 
             reddit.inbox.mark_read(new_mentions)
