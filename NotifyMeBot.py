@@ -75,7 +75,7 @@ def add(mention, subreddit):
 
         # restart checking subreddits
         active_thread_id += 1
-        Thread(target=check_subreddits, args=(active_thread_id)).start()
+        Thread(target=check_subreddits, args=([active_thread_id])).start()
 
     # save lists
     save()
@@ -121,7 +121,7 @@ def cancel(mention, subreddit):
 
             # restart checking subreddits
             active_thread_id += 1
-            Thread(target=check_subreddits, args=(active_thread_id)).start()
+            Thread(target=check_subreddits, args=([active_thread_id])).start()
             break
 
     # save lists
@@ -222,7 +222,7 @@ def check_subreddits(id):
                 sleep(10)
                 continue
 
-            subreddit = reddit.subreddit(active_subreddit)
+            subreddit = reddit.subreddit("+".join(subreddit_list))
             start_time = datetime.datetime.now()
 
             for submission in subreddit.stream.submissions():
@@ -252,5 +252,5 @@ def check_subreddits(id):
 
 
 load()
-Thread(target=check_subreddits, args=(active_thread_id)).start()
+Thread(target=check_subreddits, args=([active_thread_id])).start()
 check_inbox()
