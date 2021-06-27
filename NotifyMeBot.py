@@ -21,6 +21,7 @@ reddit = praw.Reddit(user_agent=userAgent,
 
 subreddit_list = []
 watch_list = []
+active_thread_id = 0
 
 
 # load lists
@@ -47,7 +48,7 @@ def save():
 # add new entry to search_list
 def add(mention, subreddit):
 
-    global subreddit_list, watch_list
+    global subreddit_list, watch_list, active_thread_id
 
     keywords = mention.body.lower().strip().split()
     out = []
@@ -73,7 +74,8 @@ def add(mention, subreddit):
         subreddit_list.append(str(subreddit))
 
         # restart checking subreddits
-        Thread(target=check_subreddits, args=()).start()
+        active_thread_id += 1
+        Thread(target=check_subreddits, args=(active_thread_id)).start()
 
     # save lists
     save()
@@ -118,7 +120,8 @@ def cancel(mention, subreddit):
             subreddit_list.remove(item)
 
             # restart checking subreddits
-            Thread(target=check_subreddits, args=()).start()
+            active_thread_id += 1
+            Thread(target=check_subreddits, args=(active_thread_id)).start()
             break
 
     # save lists
@@ -207,7 +210,9 @@ def check_keywords(item, lowercase_body, lowercase_title):
 
 
 # search subreddits
-def check_subreddits():
+def check_subreddits(id):
+
+    global active_thread_id
 
     while True:
         try:
@@ -217,13 +222,12 @@ def check_subreddits():
                 sleep(10)
                 continue
 
-            active_subreddit = "+".join(subreddit_list)
             subreddit = reddit.subreddit(active_subreddit)
             start_time = datetime.datetime.now()
 
             for submission in subreddit.stream.submissions():
-                # something new was added - this thread is no longer needed
-                if "+".join(subreddit_list) != active_subreddit:
+                # there is a new active thread
+                if active_thread_id != id:
                     return
 
                 submission_time = datetime.datetime.fromtimestamp(submission.created_utc)
@@ -248,5 +252,5 @@ def check_subreddits():
 
 
 load()
-Thread(target=check_subreddits, args=()).start()
+Thread(target=check_subreddits, args=(active_thread_id)).start()
 check_inbox()
