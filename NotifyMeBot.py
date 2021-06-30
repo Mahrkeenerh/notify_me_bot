@@ -234,8 +234,8 @@ def check_subreddits(id):
 
                 # only check new posts
                 if submission_time > start_time:
-                    lowercase_title = submission.title
-                    lowercase_body = submission.selftext
+                    lowercase_title = str(submission.title).lower()
+                    lowercase_body = str(submission.selftext).lower()
 
                     # loop through all watch lists
                     for item in watch_list:
