@@ -1,4 +1,4 @@
-import praw, datetime, sys, json
+import praw, datetime, sys, json, traceback
 from time import sleep
 from threading import Thread
 
@@ -179,7 +179,7 @@ def check_inbox():
         except:
             print("\n", datetime.datetime.now())
             print("En error occured with inbox")
-            print(sys.exc_info())
+            print(traceback.print_exception(*sys.exc_info()))
             sleep(60)
 
 
@@ -247,7 +247,7 @@ def check_subreddits(id):
         except:
             print("\n", datetime.datetime.now())
             print("En error occured with subreddits")
-            print(sys.exc_info())
+            print(traceback.print_exception(*sys.exc_info()))
             sleep(60)
 
 
