@@ -24,6 +24,27 @@ watch_list = []
 active_thread_id = 0
 
 
+# clean up data_list
+def purge_subreddits():
+
+    global subreddit_list, watch_list
+
+    changed = False
+
+    for subreddit in subreddit_list:
+        if not check_public(subreddit):
+            subreddit_list.remove(subreddit)
+            changed = True
+
+    for item in watch_list:
+        if not check_public(item[0]):
+            watch_list.remove(item)
+            changed = True
+
+    if changed:
+        save()    
+
+
 # load lists
 def load():
 
@@ -35,6 +56,8 @@ def load():
         subreddit_list = data["subreddit_list"]
         watch_list = data["watch_list"]
 
+    purge_subreddits()
+
 
 # save lists
 def save():
@@ -43,6 +66,21 @@ def save():
 
     with open("data_list.json", "w") as json_file:
         json.dump({"subreddit_list": subreddit_list, "watch_list": watch_list}, json_file)
+
+
+# check if subreddit is public
+def check_public(subreddit_name):
+
+    global reddit
+
+    try:
+        if reddit.subreddit(subreddit_name).subreddit_type == "public":
+            return True
+    
+    except:
+        return False
+
+    return True
 
 
 # add new entry to search_list
@@ -158,6 +196,8 @@ def check_inbox():
                     continue
 
                 subreddit = get_subreddit(mention)
+                if not check_public(subreddit):
+                    continue
 
                 if "cancel" in lowercase_body:
                     removed = cancel(mention, subreddit)
