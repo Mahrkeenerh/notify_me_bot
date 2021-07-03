@@ -208,6 +208,7 @@ def check_inbox():
 
                 subreddit = get_subreddit(mention)
                 if not check_public(subreddit):
+                    mention.reply('No search listings were added.\n\nCheck, if the subreddit exists or it is public.')
                     continue
 
                 if "cancel" in lowercase_body:
