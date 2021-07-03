@@ -302,6 +302,8 @@ def check_subreddits(id):
             sleep(60)
 
 
+print("Starting")
+
 load()
 Thread(target=check_subreddits, args=([active_thread_id])).start()
 check_inbox()
