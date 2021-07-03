@@ -31,15 +31,26 @@ def purge_subreddits():
 
     changed = False
 
+    dupli_list = []
+
     for subreddit in subreddit_list:
         if not check_public(subreddit):
-            subreddit_list.remove(subreddit)
             changed = True
+
+        else:
+            dupli_list.append(subreddit)
+
+    subreddit_list = dupli_list
+    dupli_list = []
 
     for item in watch_list:
         if not check_public(item[0]):
-            watch_list.remove(item)
             changed = True
+        
+        else:
+            dupli_list.append(item)
+
+    watch_list = dupli_list
 
     if changed:
         save()    
