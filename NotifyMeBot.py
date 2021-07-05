@@ -21,6 +21,8 @@ reddit = praw.Reddit(user_agent=userAgent,
 
 subreddit_list = []
 watch_list = []
+queue_mentions = []
+queue_directs = []
 active_thread_id = 0
 
 
@@ -191,6 +193,8 @@ def get_subreddit(mention):
 # check all mentions
 def check_inbox():
 
+    global queue_mentions
+
     while True:
         try:
             new_mentions = []
@@ -208,22 +212,43 @@ def check_inbox():
 
                 subreddit = get_subreddit(mention)
                 if not check_public(subreddit):
-                    mention.reply('No actions were performed.\n\nCheck, if the subreddit exists and it is public.')
+                    message_text = 'No actions were performed.\n\nCheck, if the subreddit exists and it is public.'
+
+                    # try to send message, or garbage
+                    try:
+                        mention.reply(message_text)
+                    except:
+                        queue_mentions.append([mention, message_text])
+
                     continue
 
                 if "cancel" in lowercase_body:
                     removed = cancel(mention, subreddit)
-                    if removed > 0:
-                        mention.reply('Removed %d search listings.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' % (removed))
 
+                    if removed > 0:
+                        message_text = 'Removed %d search listings.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' % (removed)
                     else:
-                        mention.reply('No search listings were removed.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)')
+                        message_text = 'No search listings were removed.\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)'
+
+                    # try to send message, or garbage
+                    try:
+                        mention.reply(message_text)
+                    except:
+                        queue_mentions.append([mention, message_text])
+
                     continue
 
                 if "create" in lowercase_body:
                     keywords = add(mention, subreddit)
-                    mention.reply('New search added:\n\nSubreddit: %s\n\nUser: %s\n\nKeywords: %s\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' 
-                        % (subreddit, mention.author, ", ".join(keywords)))
+                    message_text = 'New search added:\n\nSubreddit: %s\n\nUser: %s\n\nKeywords: %s\n\nSuggestions? Source? Need help? [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)' % (subreddit, mention.author, ", ".join(keywords))
+                    
+                    # try to send message, or garbage
+                    try:
+                        mention.reply(message_text)
+                    except:
+                        queue_mentions.append([mention, message_text])
+
+                    continue
 
             reddit.inbox.mark_read(new_mentions)
 
@@ -264,7 +289,7 @@ def check_keywords(item, lowercase_body, lowercase_title):
 # search subreddits
 def check_subreddits(id):
 
-    global active_thread_id
+    global active_thread_id, queue_directs
 
     while True:
         try:
@@ -293,7 +318,14 @@ def check_subreddits(id):
                     for item in watch_list:
                         if item[0] == submission.subreddit:
                             if submission.author != item[1] and check_keywords(item, lowercase_body, lowercase_title):
-                                reddit.redditor(item[1]).message('notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink, item[0]))
+                                message_text = 'notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink, item[0])
+                                
+                                # try to send message, or garbage
+                                try:
+                                    reddit.redditor(item[1]).message(message_text)
+                                except:
+                                    queue_directs.append([item[1], message_text])
+
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
@@ -303,8 +335,33 @@ def check_subreddits(id):
             sleep(60)
 
 
+# resend messages that didn't go through
+def garbage_collection():
+
+    global queue_mentions, queue_directs
+
+    while True:
+        try:
+
+            while not queue_mentions:
+                queue_mentions[0][0].reply(queue_mentions[0][1])
+                queue_mentions.remove(queue_mentions[0])
+
+            while not queue_directs:
+                reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1])
+                queue_directs.remove(queue_directs[0])
+
+            sleep(60)
+
+        except:
+            print("\n", datetime.datetime.now())
+            print("Message didn't still go through")
+            print(traceback.print_exception(*sys.exc_info()))
+
+
 print("Starting")
 
 load()
 Thread(target=check_subreddits, args=([active_thread_id])).start()
+Thread(target=garbage_collection(), args=()).start()
 check_inbox()
