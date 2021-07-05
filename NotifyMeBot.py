@@ -316,13 +316,13 @@ def check_subreddits(id):
                     for item in watch_list:
                         if item[0] == submission.subreddit:
                             if submission.author != item[1] and check_keywords(item, lowercase_body, lowercase_title):
-                                message_text = 'notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink, item[0])
+                                message = ['notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink, item[0])]
                                 
                                 # try to send message, or garbage
                                 try:
-                                    reddit.redditor(item[1]).message(message_text)
+                                    reddit.redditor(item[1]).message(message[0], message[1])
                                 except:
-                                    queue_directs.append([item[1], message_text])
+                                    queue_directs.append([item[1], message])
 
 
         # reddit is not responding or something, idk, error - wait, try again
@@ -346,7 +346,7 @@ def garbage_collection():
                 queue_mentions.remove(queue_mentions[0])
 
             while queue_directs:
-                reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1])
+                reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1][0], queue_directs[0][1][1])
                 queue_directs.remove(queue_directs[0])
 
             sleep(60)
