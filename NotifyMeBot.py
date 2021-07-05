@@ -206,9 +206,11 @@ def check_inbox():
                 if not ("u/notify_me_bot" in lowercase_body or mention.subject != "post reply"): 
                     continue
 
+                print(lowercase_body)
+
                 subreddit = get_subreddit(mention)
                 if not check_public(subreddit):
-                    mention.reply('No search listings were added.\n\nCheck, if the subreddit exists or it is public.')
+                    mention.reply('No actions were performed.\n\nCheck, if the subreddit exists and it is public.')
                     continue
 
                 if "cancel" in lowercase_body:
