@@ -69,8 +69,6 @@ def load():
         subreddit_list = data["subreddit_list"]
         watch_list = data["watch_list"]
 
-    purge_subreddits()
-
 
 # save lists
 def save():
@@ -343,11 +341,11 @@ def garbage_collection():
     while True:
         try:
 
-            while not queue_mentions:
+            while queue_mentions:
                 queue_mentions[0][0].reply(queue_mentions[0][1])
                 queue_mentions.remove(queue_mentions[0])
 
-            while not queue_directs:
+            while queue_directs:
                 reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1])
                 queue_directs.remove(queue_directs[0])
 
