@@ -185,7 +185,7 @@ def get_subreddit(mention):
     if mention.subject == "post reply":
         return mention.subreddit
 
-    return str(mention.subject).replace("re:", "").strip()
+    return str(mention.subject).replace("re:", "").replace("r/").replace("notify_me_bot:").strip()
 
 
 # check all mentions
@@ -293,7 +293,7 @@ def check_subreddits(id):
                     for item in watch_list:
                         if item[0] == submission.subreddit:
                             if submission.author != item[1] and check_keywords(item, lowercase_body, lowercase_title):
-                                reddit.redditor(item[1]).message('notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel subreddit notifications, comment in r/%s: u/notify_me_bot cancel' % (submission.permalink, item[0]))
+                                reddit.redditor(item[1]).message('notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink, item[0]))
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
