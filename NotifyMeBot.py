@@ -185,7 +185,7 @@ def get_subreddit(mention):
     if mention.subject == "post reply":
         return mention.subreddit
 
-    return str(mention.subject).replace("re:", "").replace("r/").replace("notify_me_bot:").strip()
+    return str(mention.subject).replace("re:", "").replace("r/", "").replace("notify_me_bot:", "").strip()
 
 
 # check all mentions
@@ -205,8 +205,6 @@ def check_inbox():
                 # it's a response
                 if not ("u/notify_me_bot" in lowercase_body or mention.subject != "post reply"): 
                     continue
-
-                print(lowercase_body)
 
                 subreddit = get_subreddit(mention)
                 if not check_public(subreddit):
