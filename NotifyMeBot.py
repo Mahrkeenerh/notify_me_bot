@@ -268,7 +268,7 @@ def check_subreddits(id):
 
     while True:
         try:
-            print("\nStarting subreddits")
+            print("\nStarting subreddits, id:", active_thread_id)
             # no search entries yet
             if not subreddit_list:
                 sleep(10)
