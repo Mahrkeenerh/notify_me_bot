@@ -355,6 +355,7 @@ def garbage_collection():
             print("\n", datetime.datetime.now())
             print("Message didn't still go through")
             print(traceback.print_exception(*sys.exc_info()))
+            sleep(60)
 
 
 print("Starting")
