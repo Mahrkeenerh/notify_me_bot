@@ -96,7 +96,7 @@ def load_time():
 
     try:
         with open("time.txt") as file:
-            x = file.readline()
+            x = file.readlines()
             print(x)
             print(x.strip())
             return datetime.datetime.strptime(x.strip(), '%y.%m.%d %H:%M:%S')
