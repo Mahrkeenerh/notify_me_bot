@@ -96,10 +96,7 @@ def load_time():
 
     try:
         with open("time.txt") as file:
-            x = file.readlines()
-            print(x)
-            print(x.strip())
-            return datetime.datetime.strptime(x.strip(), '%y.%m.%d %H:%M:%S')
+            return datetime.datetime.strptime(file.readline().strip(), '%y.%m.%d %H:%M:%S')
     
     except FileNotFoundError:
         save_time()
@@ -377,7 +374,6 @@ def garbage_collection():
                 reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1][0], queue_directs[0][1][1])
                 queue_directs.remove(queue_directs[0])
 
-            save_time()
             sleep(60)
 
         except:
