@@ -63,11 +63,16 @@ def load():
 
     global subreddit_list, watch_list
 
-    with open("data_list.json") as json_file:
-        data = json.load(json_file)
+    try:
+        with open("data_list.json") as json_file:
+            data = json.load(json_file)
 
-        subreddit_list = data["subreddit_list"]
-        watch_list = data["watch_list"]
+            subreddit_list = data["subreddit_list"]
+            watch_list = data["watch_list"]
+
+    except FileNotFoundError:
+        save()
+        load()
 
 
 # save lists
@@ -78,6 +83,25 @@ def save():
     with open("data_list.json", "w") as json_file:
         json.dump({"subreddit_list": subreddit_list, "watch_list": watch_list}, json_file)
 
+
+# save current time
+def save_time():
+
+    with open("time.txt", "w") as file:
+        print(datetime.datetime.now().strftime('%y.%m.%d %H:%M:%S'), file=file)
+
+
+# load last known time
+def load_time():
+
+    try:
+        with open("time.txt") as file:
+            return datetime.datetime.strptime(file.readline().strip(), '%y.%m.%d %H:%M:%S')
+    
+    except FileNotFoundError:
+        save_time()
+        load_time()
+        
 
 # check if subreddit is public
 def check_public(subreddit_name):
@@ -298,7 +322,7 @@ def check_subreddits(id):
                 continue
 
             subreddit = reddit.subreddit("+".join(subreddit_list))
-            start_time = datetime.datetime.now()
+            last_time = load_time()
 
             for submission in subreddit.stream.submissions():
                 # there is a new active thread
@@ -308,7 +332,7 @@ def check_subreddits(id):
                 submission_time = datetime.datetime.fromtimestamp(submission.created_utc)
 
                 # only check new posts
-                if submission_time > start_time:
+                if submission_time > last_time:
                     lowercase_title = str(submission.title).lower()
                     lowercase_body = str(submission.selftext).lower()
 
@@ -321,6 +345,7 @@ def check_subreddits(id):
                                 # try to send message, or garbage
                                 try:
                                     reddit.redditor(item[1]).message(message[0], message[1])
+                                    save_time()
                                 except:
                                     queue_directs.append([item[1], message])
 
@@ -349,6 +374,7 @@ def garbage_collection():
                 reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1][0], queue_directs[0][1][1])
                 queue_directs.remove(queue_directs[0])
 
+            save_time()
             sleep(60)
 
         except:
