@@ -96,7 +96,7 @@ def load_time():
 
     try:
         with open("time.txt") as file:
-            return datetime.datetime.strptime(file.readline().strip(), '%y.%m.%d %H:%M:%S')
+            return datetime.datetime.strptime(str(file.readline()).strip(), '%y.%m.%d %H:%M:%S')
     
     except FileNotFoundError:
         save_time()
