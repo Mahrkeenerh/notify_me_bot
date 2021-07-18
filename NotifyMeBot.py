@@ -54,6 +54,8 @@ def purge_subreddits():
 
     global subreddit_list, watch_list
 
+    log_message("Purging subreddits", "Before:", len(subreddit_list))
+
     changed = False
 
     dupli_list = []
@@ -77,6 +79,8 @@ def purge_subreddits():
 
     watch_list = dupli_list
 
+    log_message("After:", len(subreddit_list))
+
     if changed:
         save()
 
@@ -85,6 +89,8 @@ def purge_subreddits():
 def purge_users():
 
     global subreddit_list, watch_list
+
+    log_message("Purging users", "Before:", len(watch_list))
 
     changed = False
 
@@ -105,6 +111,8 @@ def purge_users():
             dupli_list.append(subreddit)
 
     subreddit_list = dupli_list
+
+    log_message("After:", len(watch_list))
 
     if changed:
         save()
@@ -419,6 +427,7 @@ def check_subreddits(id):
 
         # Subreddit was removed - TODO
         # except subreddit doesn't exist
+        # purge_subreddits()
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
