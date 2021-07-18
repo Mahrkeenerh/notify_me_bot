@@ -375,7 +375,7 @@ def check_subreddits(id):
 
     while True:
         try:
-            log_message("Starting subreddits", "id: " + active_thread_id)
+            log_message("Starting subreddits", "id: " + str(active_thread_id))
 
             # no search entries yet
             if not subreddit_list:
