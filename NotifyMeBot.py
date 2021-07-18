@@ -1,6 +1,9 @@
+from os import dup
 import praw, datetime, sys, json, traceback
 from time import sleep
 from threading import Thread
+
+from prawcore.exceptions import NotFound
 
 
 with open("config.json") as config_file:
@@ -26,7 +29,27 @@ queue_directs = []
 active_thread_id = 0
 
 
-# clean up data_list
+# logger for errors
+def log_error(*args):
+
+    print("\n", datetime.datetime.now())
+
+    for i in args:
+        print(i)
+
+    print(traceback.print_exception(*sys.exc_info()))
+
+
+# logger for messages
+def log_message(*args):
+
+    print("\n", datetime.datetime.now())
+
+    for i in args:
+        print(i)
+
+
+# clean up data_list for subreddits
 def purge_subreddits():
 
     global subreddit_list, watch_list
@@ -55,7 +78,36 @@ def purge_subreddits():
     watch_list = dupli_list
 
     if changed:
-        save()    
+        save()
+
+
+# clean up data_list for users
+def purge_users():
+
+    global subreddit_list, watch_list
+
+    changed = False
+
+    dupli_list = []
+
+    for item in watch_list:
+        if not check_user(item[1]):
+            changed = True
+
+        else:
+            dupli_list.append(item)
+
+    watch_list = dupli_list
+    dupli_list = []
+
+    for subreddit in subreddit_list:
+        if subreddit_list in [i[0] for i in watch_list]:
+            dupli_list.append(subreddit)
+
+    subreddit_list = dupli_list
+
+    if changed:
+        save()
 
 
 # load lists
@@ -106,13 +158,23 @@ def load_time():
 # check if subreddit is public
 def check_public(subreddit_name):
 
-    global reddit
-
     try:
         if reddit.subreddit(subreddit_name).subreddit_type == "public":
             return True
+
+    except NotFound:
+        return False
+
+    return True
+
+
+# check if user exists
+def check_user(user_name):
+
+    try:
+        reddit.redditor(user_name)
     
-    except:
+    except NotFound:
         return False
 
     return True
@@ -276,9 +338,7 @@ def check_inbox():
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-            print("\n", datetime.datetime.now())
-            print("En error occured with inbox")
-            print(traceback.print_exception(*sys.exc_info()))
+            log_error*("En error occured with inbox")
             sleep(60)
 
 
@@ -315,7 +375,8 @@ def check_subreddits(id):
 
     while True:
         try:
-            print("\nStarting subreddits, id:", active_thread_id)
+            log_message("Starting subreddits", "id: " + active_thread_id)
+
             # no search entries yet
             if not subreddit_list:
                 sleep(10)
@@ -344,17 +405,24 @@ def check_subreddits(id):
                                 
                                 # try to send message, or garbage
                                 try:
-                                    reddit.redditor(item[1]).message(message[0], message[1])
                                     save_time()
+                                    reddit.redditor(item[1]).message(message[0], message[1])
                                 except:
                                     queue_directs.append([item[1], message])
 
+        except praw.exceptions.RedditAPIException:
+            if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
+                purge_users()
+            else:
+                log_error("En error occured with subreddits")
+                sleep(60)
+
+        # Subreddit was removed - TODO
+        # except subreddit doesn't exist
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-            print("\n", datetime.datetime.now())
-            print("En error occured with subreddits")
-            print(traceback.print_exception(*sys.exc_info()))
+            log_error("En error occured with subreddits")
             sleep(60)
 
 
@@ -364,26 +432,40 @@ def garbage_collection():
     global queue_mentions, queue_directs
 
     while True:
-        try:
+        pos = 0
 
-            while queue_mentions:
-                queue_mentions[0][0].reply(queue_mentions[0][1])
-                queue_mentions.remove(queue_mentions[0])
+        while pos < len(queue_mentions) and queue_mentions:
+            try:
+                pos += 1
+                queue_mentions[pos - 1][0].reply(queue_mentions[pos - 1][1])
+                queue_mentions.remove(queue_mentions[pos - 1])
+                pos -= 1
 
-            while queue_directs:
-                reddit.redditor(queue_directs[0][0]).message(queue_directs[0][1][0], queue_directs[0][1][1])
-                queue_directs.remove(queue_directs[0])
+            except:
+                log_error("Message didn't still go through", "\nAuthor:", queue_directs[pos - 1][0].author, "\nBody:", queue_directs[pos - 1][0].body, "\nReply body:", queue_mentions[pos - 1][1])
 
-            sleep(60)
+        pos = 0
 
-        except:
-            print("\n", datetime.datetime.now())
-            print("Message didn't still go through")
-            print(traceback.print_exception(*sys.exc_info()))
-            sleep(60)
+        while pos < len(queue_directs) and queue_directs:
+            try:
+                pos += 1
+                reddit.redditor(queue_directs[pos - 1][0]).message(queue_directs[pos - 1][1][0], queue_directs[pos - 1][1][1])
+                queue_directs.remove(queue_directs[pos - 1])
+                pos -= 1
+
+            # can't send direct - user doesn't exist anymore
+            except praw.exceptions.RedditAPIException:
+                if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
+                    queue_directs.remove(queue_directs[pos - 1])
+                    purge_users()
+
+            except:
+                log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
+
+        sleep(60)
 
 
-print("Starting")
+log_message("Starting")
 
 load()
 Thread(target=check_subreddits, args=([active_thread_id])).start()
