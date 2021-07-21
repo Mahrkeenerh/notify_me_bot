@@ -291,13 +291,10 @@ def check_inbox():
         try:
             new_mentions = []
 
-            for mention in reddit.inbox.all():
+            for mention in reddit.inbox.unread():
                 new_mentions.append(mention)
                 lowercase_body = mention.body.lower()
 
-                if not mention.new:
-                    continue
-                
                 # it's a response
                 if not ("u/notify_me_bot" in lowercase_body or mention.subject != "post reply"): 
                     continue
