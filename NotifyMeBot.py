@@ -415,13 +415,6 @@ def check_subreddits(id):
                                 except:
                                     queue_directs.append([item[1], message])
 
-        except praw.exceptions.RedditAPIException:
-            if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
-                purge_users()
-            else:
-                log_error("En error occured with subreddits")
-                sleep(60)
-
         # Subreddit was removed - TODO
         # except subreddit doesn't exist
         # purge_subreddits()
@@ -429,6 +422,10 @@ def check_subreddits(id):
         # reddit is not responding or something, idk, error - wait, try again
         except:
             log_error("En error occured with subreddits")
+
+            if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
+                purge_users()
+
             sleep(60)
 
 
@@ -459,14 +456,12 @@ def garbage_collection():
                 queue_directs.remove(queue_directs[pos - 1])
                 pos -= 1
 
-            # can't send direct - user doesn't exist anymore
-            except praw.exceptions.RedditAPIException:
+            except:
+                log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
+
                 if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
                     queue_directs.remove(queue_directs[pos - 1])
                     purge_users()
-
-            except:
-                log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
 
         sleep(60)
 
