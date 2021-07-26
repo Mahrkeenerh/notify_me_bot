@@ -106,8 +106,10 @@ def purge_users():
     watch_list = dupli_list
     dupli_list = []
 
+    new_sub_list = [i[0] for i in watch_list]
+
     for subreddit in subreddit_list:
-        if subreddit_list in [i[0] for i in watch_list]:
+        if subreddit in new_sub_list:
             dupli_list.append(subreddit)
 
     subreddit_list = dupli_list
@@ -180,7 +182,7 @@ def check_public(subreddit_name):
 def check_user(user_name):
 
     try:
-        reddit.redditor(user_name)
+        reddit.redditor(user_name).id
     
     except NotFound:
         return False
@@ -472,3 +474,7 @@ load()
 Thread(target=check_subreddits, args=([active_thread_id])).start()
 Thread(target=garbage_collection(), args=()).start()
 check_inbox()
+
+
+# TODO
+# Wait for file
