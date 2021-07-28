@@ -95,7 +95,7 @@ def purge_subreddits():
     if changed:
         save()
 
-    list_lock = True
+    list_lock = False
 
 
 # clean up data_list for users
