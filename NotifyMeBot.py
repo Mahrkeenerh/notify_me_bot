@@ -1,4 +1,4 @@
-from os import dup
+from os import dup, error
 import praw, datetime, sys, json, traceback
 from time import sleep
 from threading import Thread
@@ -22,10 +22,15 @@ reddit = praw.Reddit(user_agent=userAgent,
     username=userN, 
     password=userP)
 
+file_lock = False
+list_lock = False
+
 subreddit_list = []
 watch_list = []
+
 queue_mentions = []
 queue_directs = []
+
 active_thread_id = 0
 
 
@@ -52,9 +57,15 @@ def log_message(*args):
 # clean up data_list for subreddits
 def purge_subreddits():
 
-    global subreddit_list, watch_list
+    global subreddit_list, watch_list, list_lock
 
     log_message("Purging subreddits", "Before:", len(subreddit_list))
+
+    while list_lock:
+        log_message("Subreddit purge sleeping")
+        sleep(1)
+    
+    list_lock = True
 
     changed = False
 
@@ -84,13 +95,21 @@ def purge_subreddits():
     if changed:
         save()
 
+    list_lock = True
+
 
 # clean up data_list for users
 def purge_users():
 
-    global subreddit_list, watch_list
+    global subreddit_list, watch_list, list_lock
 
     log_message("Purging users", "Before:", len(watch_list))
+
+    while list_lock:
+        log_message("User purge sleeping")
+        sleep(1)
+    
+    list_lock = True
 
     changed = False
 
@@ -119,11 +138,19 @@ def purge_users():
     if changed:
         save()
 
+    list_lock = False
+
 
 # load lists
 def load():
 
-    global subreddit_list, watch_list
+    global subreddit_list, watch_list, file_lock
+
+    while file_lock:
+        log_message("File load sleeping")
+        sleep(1)
+    
+    file_lock = True
 
     try:
         with open("data_list.json") as json_file:
@@ -133,17 +160,28 @@ def load():
             watch_list = data["watch_list"]
 
     except FileNotFoundError:
+        file_lock = False
         save()
         load()
+
+    file_lock = False
 
 
 # save lists
 def save():
 
-    global subreddit_list, watch_list
+    global subreddit_list, watch_list, file_lock
+
+    while file_lock:
+        log_message("File save sleeping")
+        sleep(1)
+    
+    file_lock = True
 
     with open("data_list.json", "w") as json_file:
         json.dump({"subreddit_list": subreddit_list, "watch_list": watch_list}, json_file)
+
+    file_lock = False
 
 
 # save current time
@@ -193,7 +231,13 @@ def check_user(user_name):
 # add new entry to search_list
 def add(mention, subreddit):
 
-    global subreddit_list, watch_list, active_thread_id
+    global subreddit_list, watch_list, active_thread_id, list_lock
+
+    while list_lock:
+        log_message("Add sleeping")
+        sleep(1)
+
+    list_lock = True
 
     keywords = mention.body.lower().strip().split()
     out = []
@@ -224,6 +268,8 @@ def add(mention, subreddit):
 
     # save lists
     save()
+
+    list_lock = False
     
     return out
 
@@ -231,7 +277,13 @@ def add(mention, subreddit):
 # cancel search
 def cancel(mention, subreddit):
 
-    global subreddit_list, watch_list, active_thread_id
+    global subreddit_list, watch_list, active_thread_id, list_lock
+
+    while list_lock:
+        log_message("Cancel sleeping")
+        sleep(1)
+
+    list_lock = True
 
     keywords = mention.body.lower().strip().split()
     removed = 0
@@ -272,10 +324,12 @@ def cancel(mention, subreddit):
     # save lists
     save()
 
+    list_lock = False
+
     return removed
 
 
-# return subreddit
+# return subreddit (could be from a message or from post)
 def get_subreddit(mention):
 
     if mention.subject == "post reply":
@@ -417,16 +471,12 @@ def check_subreddits(id):
                                 except:
                                     queue_directs.append([item[1], message])
 
-        # Subreddit was removed - TODO
-        # except subreddit doesn't exist
-        # purge_subreddits()
-
         # reddit is not responding or something, idk, error - wait, try again
         except:
             log_error("En error occured with subreddits")
 
-            if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
-                purge_users()
+            if "400" in "".join(traceback.format_exception(*sys.exc_info())):
+                purge_subreddits()
 
             sleep(60)
 
@@ -447,7 +497,11 @@ def garbage_collection():
                 pos -= 1
 
             except:
-                log_error("Message didn't still go through", "\nAuthor:", queue_directs[pos - 1][0].author, "\nBody:", queue_directs[pos - 1][0].body, "\nReply body:", queue_mentions[pos - 1][1])
+                if "RATELIMIT" in "".join(traceback.format_exception(*sys.exc_info())):
+                    continue
+
+                else:
+                    log_error("Message didn't still go through", "\nAuthor:", queue_directs[pos - 1][0].author, "\nBody:", queue_directs[pos - 1][0].body, "\nReply body:", queue_mentions[pos - 1][1])
 
         pos = 0
 
@@ -459,7 +513,11 @@ def garbage_collection():
                 pos -= 1
 
             except:
-                log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
+                if "RATELIMIT" in "".join(traceback.format_exception(*sys.exc_info())):
+                    continue
+
+                else:
+                    log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
 
                 if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
                     queue_directs.remove(queue_directs[pos - 1])
@@ -477,7 +535,3 @@ purge_users()
 Thread(target=check_subreddits, args=([active_thread_id])).start()
 Thread(target=garbage_collection(), args=()).start()
 check_inbox()
-
-
-# TODO
-# Wait for file
