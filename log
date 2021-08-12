@@ -1,0 +1,2850 @@
+Version 7.3.0 of praw is outdated. Version 7.4.0 was released Friday July 30, 2021.
+
+ 2021-08-10 22:24:48.839729
+Starting
+
+ 2021-08-10 22:24:48.843036
+Purging subreddits
+Before:
+10
+
+ 2021-08-10 22:24:59.424237
+After:
+10
+
+ 2021-08-10 22:24:59.429435
+Purging users
+Before:
+31
+
+ 2021-08-10 22:25:07.949362
+After:
+31
+
+ 2021-08-10 22:25:07.950499
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:06:57.821725
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 503 HTTP response
+None
+
+ 2021-08-12 04:07:57.888864
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:08:49.582788
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 503 HTTP response
+None
+
+ 2021-08-12 04:09:49.645739
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:10:41.050393
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 34, in call
+    response = request_function(*args, **kwargs)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+None
+
+ 2021-08-12 04:11:41.156640
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:12:33.513199
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 34, in call
+    response = request_function(*args, **kwargs)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+None
+
+ 2021-08-12 04:13:33.581485
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:14:13.221083
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 34, in call
+    response = request_function(*args, **kwargs)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+None
+
+ 2021-08-12 04:15:13.230805
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:15:47.115126
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 503 HTTP response
+None
+
+ 2021-08-12 04:16:47.178283
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:17:34.959958
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 34, in call
+    response = request_function(*args, **kwargs)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+None
+
+ 2021-08-12 04:18:35.028098
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:18:54.883901
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 34, in call
+    response = request_function(*args, **kwargs)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+None
+
+ 2021-08-12 04:19:54.910753
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:20:47.599030
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 34, in call
+    response = request_function(*args, **kwargs)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='oauth.reddit.com', port=443): Read timed out. (read timeout=16)
+None
+
+ 2021-08-12 04:21:47.681343
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:22:16.334050
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 503 HTTP response
+None
+
+ 2021-08-12 04:23:16.397304
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:23:52.602974
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:24:52.668270
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:25:10.752474
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:26:10.814092
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:26:12.228926
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:27:12.292706
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:28:04.221808
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 35, in _post
+    headers={"Connection": "close"},
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+None
+
+ 2021-08-12 04:29:04.290253
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:29:55.479891
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 35, in _post
+    headers={"Connection": "close"},
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+None
+
+ 2021-08-12 04:30:55.548679
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:31:32.517997
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:32:32.582104
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:32:32.775411
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:33:32.836965
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:33:56.042170
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:34:56.105961
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:34:56.503285
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:35:56.564812
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:36:10.986352
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:37:11.050001
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:37:34.138033
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:38:34.201965
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:39:25.994951
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:40:26.058159
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:40:41.807165
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:41:41.870742
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:42:31.613851
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:43:31.678640
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:43:59.191613
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:44:59.255499
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:45:52.855998
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 35, in _post
+    headers={"Connection": "close"},
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+None
+
+ 2021-08-12 04:46:52.900815
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:46:54.393647
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:47:54.457230
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:48:33.002450
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:49:33.066540
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:49:37.178278
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:50:37.242026
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:51:30.898669
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 35, in _post
+    headers={"Connection": "close"},
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+None
+
+ 2021-08-12 04:52:30.967556
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:53:23.780012
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 35, in _post
+    headers={"Connection": "close"},
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+None
+
+ 2021-08-12 04:54:23.805248
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:54:32.309986
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 502 HTTP response
+None
+
+ 2021-08-12 04:55:32.373589
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:56:23.879058
+En error occured with subreddits
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/lib/python3.7/http/client.py", line 1352, in getresponse
+    response.begin()
+  File "/usr/lib/python3.7/http/client.py", line 310, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.7/http/client.py", line 271, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/usr/lib/python3.7/ssl.py", line 1052, in recv_into
+    return self.read(nbytes, buffer)
+  File "/usr/lib/python3.7/ssl.py", line 911, in read
+    return self._sslobj.read(len, buffer)
+socket.timeout: The read operation timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/lib/python3/dist-packages/urllib3/util/retry.py", line 367, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/lib/python3/dist-packages/six.py", line 693, in reraise
+    raise value
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/usr/lib/python3/dist-packages/urllib3/connectionpool.py", line 306, in _raise_timeout
+    raise ReadTimeoutError(self, url, "Read timed out. (read timeout=%s)" % timeout_value)
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 54, in request
+    return self._http.request(*args, timeout=timeout, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3/dist-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3/dist-packages/requests/adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 35, in _post
+    headers={"Connection": "close"},
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/requestor.py", line 56, in request
+    raise RequestException(exc, args, kwargs)
+prawcore.exceptions.RequestException: error with request HTTPSConnectionPool(host='www.reddit.com', port=443): Read timed out. (read timeout=16.0)
+None
+
+ 2021-08-12 04:57:23.910820
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:57:24.110560
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:58:24.172120
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:58:24.276337
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 04:59:24.337866
+Starting subreddits
+id: 0
+
+ 2021-08-12 04:59:48.859528
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:00:48.923422
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:00:49.026726
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:01:49.071237
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:01:56.604727
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:02:56.668350
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:02:56.868281
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:03:56.920967
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:04:22.753981
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:05:22.810812
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:05:24.170438
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:06:24.234159
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:06:24.326426
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:07:24.389598
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:07:57.373551
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:08:57.437363
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:08:57.545088
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:09:57.606601
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:09:57.688026
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 230, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 189, in _make_request
+    timeout=timeout,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/rate_limit.py", line 33, in call
+    kwargs["headers"] = set_header_callback()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 277, in _set_header_callback
+    self._authorizer.refresh()
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 376, in refresh
+    password=self._password,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 155, in _request_token
+    response = self._authenticator._post(url, **data)
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/auth.py", line 38, in _post
+    raise ResponseException(response)
+prawcore.exceptions.ResponseException: received 503 HTTP response
+None
+
+ 2021-08-12 05:10:57.701004
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:11:16.284739
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:12:16.348042
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:12:27.793000
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:13:27.856059
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:13:37.061248
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:14:37.124619
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:14:48.360364
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:15:48.423806
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:15:57.323447
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:16:57.386683
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:17:04.516491
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:18:04.579836
+Starting subreddits
+id: 0
+
+ 2021-08-12 05:18:13.465104
+En error occured with subreddits
+Traceback (most recent call last):
+  File "NotifyMeBot.py", line 449, in check_subreddits
+    for submission in subreddit.stream.submissions():
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/util.py", line 188, in stream_generator
+    for item in reversed(list(function(limit=limit, **function_kwargs))):
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 63, in __next__
+    self._next_batch()
+  File "/usr/local/lib/python3.7/dist-packages/praw/models/listing/generator.py", line 73, in _next_batch
+    self._listing = self._reddit.get(self.url, params=self.params)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 566, in get
+    return self._objectify_request(method="GET", params=params, path=path)
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 673, in _objectify_request
+    path=path,
+  File "/usr/local/lib/python3.7/dist-packages/praw/reddit.py", line 856, in request
+    json=json,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 331, in request
+    url=url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 257, in _request_with_retries
+    url,
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 164, in _do_retry
+    retry_strategy_state=retry_strategy_state.consume_available_retry(),  # noqa: E501
+  File "/home/pi/.local/lib/python3.7/site-packages/prawcore/sessions.py", line 260, in _request_with_retries
+    raise self.STATUS_EXCEPTIONS[response.status_code](response)
+prawcore.exceptions.ServerError: received 504 HTTP response
+None
+
+ 2021-08-12 05:19:13.506447
+Starting subreddits
+id: 0
