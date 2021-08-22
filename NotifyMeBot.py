@@ -533,5 +533,5 @@ purge_subreddits()
 purge_users()
 
 Thread(target=check_subreddits, args=([active_thread_id])).start()
-Thread(target=garbage_collection(), args=()).start()
+Thread(target=garbage_collection, args=()).start()
 check_inbox()
