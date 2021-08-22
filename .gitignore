@@ -1,4 +1,5 @@
 .vscode
-config.json
+*.json
 *.sh
+*.txt
 log
