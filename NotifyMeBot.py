@@ -1,4 +1,3 @@
-from os import dup, error
 import praw, datetime, sys, json, traceback
 from time import sleep
 from threading import Thread
@@ -356,7 +355,7 @@ def check_inbox():
                     continue
 
                 subreddit = get_subreddit(mention)
-                if not check_public(subreddit):
+                if not check_public(subreddit) and ("cancel" in lowercase_body or "create" in lowercase_body):
                     message_text = 'No actions were performed.\n\nCheck, if the subreddit exists and it is public.'
 
                     # try to send message, or garbage
