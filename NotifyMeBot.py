@@ -342,6 +342,8 @@ def check_inbox():
 
     global queue_mentions
 
+    log_message("Starting inbox")
+
     while True:
         try:
             new_mentions = []
@@ -395,6 +397,7 @@ def check_inbox():
                     continue
 
             reddit.inbox.mark_read(new_mentions)
+            sleep(60)
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
