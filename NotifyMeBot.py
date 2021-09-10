@@ -478,7 +478,10 @@ def check_subreddits(id):
             log_error("En error occured with subreddits")
 
             if "400" in "".join(traceback.format_exception(*sys.exc_info())):
-                purge_subreddits()
+                try:
+                    purge_subreddits()
+                except:
+                    log_error("Error while purging")
 
             sleep(60)
 
