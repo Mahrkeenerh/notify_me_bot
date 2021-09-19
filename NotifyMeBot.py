@@ -401,7 +401,7 @@ def check_inbox():
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-            log_error*("En error occured with inbox")
+            log_error("En error occured with inbox")
             sleep(60)
 
 
