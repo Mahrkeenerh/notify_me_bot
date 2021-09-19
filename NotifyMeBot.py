@@ -206,16 +206,11 @@ def load_time():
 def check_public(subreddit_name):
 
     try:
-        print(subreddit_name)
-        print(reddit.subreddit(subreddit_name).subreddit_type)
         if reddit.subreddit(subreddit_name).subreddit_type == "public":
             return True
 
-    except NotFound:
-        return False
-    
     except:
-        print(traceback.print_exception(*sys.exc_info()))
+        return False
 
     return True
 
