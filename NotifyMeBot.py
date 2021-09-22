@@ -1,4 +1,4 @@
-import praw, datetime, sys, json, traceback
+import praw, datetime, sys, json, traceback, MiscKit
 from time import sleep
 from threading import Thread
 
@@ -21,7 +21,6 @@ reddit = praw.Reddit(user_agent=userAgent,
     username=userN, 
     password=userP)
 
-file_lock = False
 list_lock = False
 
 subreddit_list = []
@@ -33,24 +32,43 @@ queue_directs = []
 active_thread_id = 0
 
 
-# logger for errors
-def log_error(*args):
+# load lists
+def load():
 
-    print("\n", datetime.datetime.now())
+    global subreddit_list, watch_list
 
-    for i in args:
-        print(i)
+    data_dict = {"subreddit_list": subreddit_list, "watch_list": watch_list}
+    MiscKit.load("data_list.json", data_dict)
 
-    print(traceback.print_exception(*sys.exc_info()))
+    subreddit_list = data_dict["subreddit_list"]
+    watch_list = data_dict["watch_list"]
 
 
-# logger for messages
-def log_message(*args):
+# save lists
+def save():
 
-    print("\n", datetime.datetime.now())
+    global subreddit_list, watch_list
 
-    for i in args:
-        print(i)
+    MiscKit.save("data_list.json", {"subreddit_list": subreddit_list, "watch_list": watch_list})
+
+
+# save current time
+def save_time():
+
+    with open("time.txt", "w") as file:
+        print(datetime.datetime.now().strftime('%y.%m.%d %H:%M:%S'), file=file)
+
+
+# load last known time
+def load_time():
+
+    try:
+        with open("time.txt") as file:
+            return datetime.datetime.strptime(file.readline().strip(), '%y.%m.%d %H:%M:%S')
+    
+    except FileNotFoundError:
+        save_time()
+        return load_time()
 
 
 # clean up data_list for subreddits
@@ -58,10 +76,10 @@ def purge_subreddits():
 
     global subreddit_list, watch_list, list_lock
 
-    log_message("Purging subreddits", "Before:", len(subreddit_list))
+    MiscKit.log_message("Purging subreddits", "Before:", len(subreddit_list))
 
     while list_lock:
-        log_message("Subreddit purge sleeping")
+        MiscKit.log_message("Subreddit purge sleeping")
         sleep(1)
     
     list_lock = True
@@ -89,7 +107,7 @@ def purge_subreddits():
 
     watch_list = dupli_list
 
-    log_message("After:", len(subreddit_list))
+    MiscKit.log_message("After:", len(subreddit_list))
 
     if changed:
         save()
@@ -102,10 +120,10 @@ def purge_users():
 
     global subreddit_list, watch_list, list_lock
 
-    log_message("Purging users", "Before:", len(watch_list))
+    MiscKit.log_message("Purging users", "Before:", len(watch_list))
 
     while list_lock:
-        log_message("User purge sleeping")
+        MiscKit.log_message("User purge sleeping")
         sleep(1)
     
     list_lock = True
@@ -132,75 +150,13 @@ def purge_users():
 
     subreddit_list = dupli_list
 
-    log_message("After:", len(watch_list))
+    MiscKit.log_message("After:", len(watch_list))
 
     if changed:
         save()
 
     list_lock = False
 
-
-# load lists
-def load():
-
-    global subreddit_list, watch_list, file_lock
-
-    while file_lock:
-        log_message("File load sleeping")
-        sleep(1)
-    
-    file_lock = True
-
-    try:
-        with open("data_list.json") as json_file:
-            data = json.load(json_file)
-
-            subreddit_list = data["subreddit_list"]
-            watch_list = data["watch_list"]
-
-    except FileNotFoundError:
-        file_lock = False
-        save()
-        load()
-
-    file_lock = False
-
-
-# save lists
-def save():
-
-    global subreddit_list, watch_list, file_lock
-
-    while file_lock:
-        log_message("File save sleeping")
-        sleep(1)
-    
-    file_lock = True
-
-    with open("data_list.json", "w") as json_file:
-        json.dump({"subreddit_list": subreddit_list, "watch_list": watch_list}, json_file)
-
-    file_lock = False
-
-
-# save current time
-def save_time():
-
-    with open("time.txt", "w") as file:
-        print(datetime.datetime.now().strftime('%y.%m.%d %H:%M:%S'), file=file)
-
-
-# load last known time
-def load_time():
-
-    try:
-        with open("time.txt") as file:
-            return datetime.datetime.strptime(file.readline().strip(), '%y.%m.%d %H:%M:%S')
-    
-    except FileNotFoundError:
-        save_time()
-        return load_time()
-        
 
 # check if subreddit is public
 def check_public(subreddit_name):
@@ -233,7 +189,7 @@ def add(mention, subreddit):
     global subreddit_list, watch_list, active_thread_id, list_lock
 
     while list_lock:
-        log_message("Add sleeping")
+        MiscKit.log_message("Add sleeping")
         sleep(1)
 
     list_lock = True
@@ -279,7 +235,7 @@ def cancel(mention, subreddit):
     global subreddit_list, watch_list, active_thread_id, list_lock
 
     while list_lock:
-        log_message("Cancel sleeping")
+        MiscKit.log_message("Cancel sleeping")
         sleep(1)
 
     list_lock = True
@@ -342,7 +298,7 @@ def check_inbox():
 
     global queue_mentions
 
-    log_message("Starting inbox")
+    MiscKit.log_message("Starting inbox")
 
     while True:
         try:
@@ -401,7 +357,7 @@ def check_inbox():
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-            log_error("En error occured with inbox")
+            MiscKit.log_error("En error occured with inbox")
             sleep(60)
 
 
@@ -438,7 +394,7 @@ def check_subreddits(id):
 
     while True:
         try:
-            log_message("Starting subreddits", "id: " + str(active_thread_id))
+            MiscKit.log_message("Starting subreddits", "id: " + str(active_thread_id))
 
             # no search entries yet
             if not subreddit_list:
@@ -475,13 +431,13 @@ def check_subreddits(id):
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
-            log_error("En error occured with subreddits")
+            MiscKit.log_error("En error occured with subreddits")
 
             if "400" in "".join(traceback.format_exception(*sys.exc_info())):
                 try:
                     purge_subreddits()
                 except:
-                    log_error("Error while purging")
+                    MiscKit.log_error("Error while purging")
 
             sleep(60)
 
@@ -506,7 +462,7 @@ def garbage_collection():
                     continue
 
                 else:
-                    log_error("Message didn't still go through", "\nAuthor:", queue_directs[pos - 1][0].author, "\nBody:", queue_directs[pos - 1][0].body, "\nReply body:", queue_mentions[pos - 1][1])
+                    MiscKit.log_error("Message didn't still go through", "\nAuthor:", queue_directs[pos - 1][0].author, "\nBody:", queue_directs[pos - 1][0].body, "\nReply body:", queue_mentions[pos - 1][1])
 
         pos = 0
 
@@ -522,7 +478,7 @@ def garbage_collection():
                     continue
 
                 else:
-                    log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
+                    MiscKit.log_error("Message didn't still go through", "\nUser:", queue_directs[pos - 1][0], "\nObject:", queue_directs[pos - 1][1][0], "\nReply body:", queue_directs[pos - 1][1][1])
 
                 if "USER_DOESNT_EXIST" in "".join(traceback.format_exception(*sys.exc_info())):
                     queue_directs.remove(queue_directs[pos - 1])
@@ -531,7 +487,7 @@ def garbage_collection():
         sleep(60)
 
 
-log_message("Starting")
+MiscKit.log_message("Starting")
 
 load()
 purge_subreddits()
