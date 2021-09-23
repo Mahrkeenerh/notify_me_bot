@@ -490,8 +490,8 @@ def garbage_collection():
 MiscKit.log_message("Starting")
 
 load()
-purge_subreddits()
-purge_users()
+# purge_subreddits()
+# purge_users()
 
 Thread(target=check_subreddits, args=([active_thread_id])).start()
 sleep(0.1)
