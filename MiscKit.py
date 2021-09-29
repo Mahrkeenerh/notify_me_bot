@@ -1,5 +1,5 @@
 import datetime, sys, traceback, json
-from time import sleep
+from threading import Lock
 
 locks = {}
 
@@ -30,13 +30,9 @@ def load(file_name, data_dict):
     global locks
 
     if file_name not in locks:
-        locks[file_name] = False
-
-    while locks[file_name]:
-        log_message("Loading file %s" % (file_name), "locked")
-        sleep(1)
+        locks[file_name] = Lock()
     
-    locks[file_name] = True
+    locks[file_name].acquire()
 
     try:
         with open(file_name) as json_file:
@@ -46,11 +42,11 @@ def load(file_name, data_dict):
                 data_dict[key] = value
 
     except FileNotFoundError:
-        locks[file_name] = False
+        locks[file_name].release()
         save(file_name, data_dict)
         load(file_name, data_dict)
 
-    locks[file_name] = False
+    locks[file_name].release()
 
 
 # save json file
@@ -59,15 +55,11 @@ def save(file_name, data_dict):
     global locks
 
     if file_name not in locks:
-        locks[file_name] = False
+        locks[file_name] = Lock()
 
-    while locks[file_name]:
-        log_message("Saving file %s" % (file_name), "locked")
-        sleep(1)
-    
-    locks[file_name] = True
+    locks[file_name].acquire()
 
     with open("data_list.json", "w") as json_file:
         json.dump(data_dict, json_file)
 
-    locks[file_name] = False
+    locks[file_name].release()
