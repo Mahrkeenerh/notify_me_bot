@@ -288,7 +288,7 @@ def cancel(mention, subreddit):
 def get_subreddit(mention):
 
     if mention.subject == "post reply":
-        return mention.subreddit
+        return mention.subreddit.name
 
     return str(mention.subject).replace("re:", "").replace("r/", "").replace("notify_me_bot:", "").strip()
 
