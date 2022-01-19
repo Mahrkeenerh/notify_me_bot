@@ -422,7 +422,7 @@ def check_subreddits(id):
                     for item in watch_list:
                         if item[0] == submission.subreddit:
                             if submission.author != item[1] and check_keywords(item, lowercase_body, lowercase_title):
-                                message = ['notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n%s\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink)]
+                                message = ['notify_me_bot: %s' % (item[0]), 'You requested a notification, here is your post:\n\n[%s](%s)\n\nTo cancel this subreddit notifications, reply: cancel' % (submission.permalink, "https://reddit.com" + submission.permalink)]
                                 
                                 # try to send message, or garbage
                                 try:
