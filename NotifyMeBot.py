@@ -288,10 +288,7 @@ def cancel(mention, subreddit):
 def get_subreddit(mention):
 
     if mention.subject in ["post reply", "comment reply", "username mention"]:
-        MiscKit.log_message("Subject:", mention.subject, "Subreddit:", mention.subreddit.display_name)
         return mention.subreddit.display_name
-
-    MiscKit.log_message("Subject:", mention.subject, "Subreddit:", str(mention.subject).replace("re:", "").replace("r/", "").replace("notify_me_bot:", "").strip())
 
     return str(mention.subject).replace("re:", "").replace("r/", "").replace("notify_me_bot:", "").strip()
 
