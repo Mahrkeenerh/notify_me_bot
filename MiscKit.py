@@ -60,6 +60,6 @@ def save(file_name, data_dict):
     locks[file_name].acquire()
 
     with open("data_list.json", "w") as json_file:
-        json.dump(data_dict, json_file)
+        json.dump(data_dict, json_file, indent=4)
 
     locks[file_name].release()
