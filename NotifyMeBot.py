@@ -474,6 +474,11 @@ def garbage_collection():
                 pos -= 1
 
             except:
+                if "PM_MODERATOR_RESTRICTION" in "".join(traceback.format_exception(*sys.exc_info())):
+                    queue_directs.remove(queue_directs[pos - 1])
+                    pos -= 1
+                    continue
+
                 if "RATELIMIT" in "".join(traceback.format_exception(*sys.exc_info())):
                     continue
 
