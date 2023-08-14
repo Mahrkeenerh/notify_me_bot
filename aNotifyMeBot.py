@@ -294,10 +294,11 @@ async def check_subreddits(my_id):
                     subreddit_name = str(submission.subreddit).lower()
 
                     # loop through all watch lists
-                    for watcher_id, (author, keywords) in watch_list[subreddit_name].items():
-                        if str(submission.author) != author and check_keywords(keywords, lowercase_body, lowercase_title):
+                    for watcher_id, (user, keywords) in watch_list[subreddit_name].items():
+                        if str(submission.author) != user and check_keywords(keywords, lowercase_body, lowercase_title):
                             save_time()
-                            reddit.redditor(author).message(
+                            redditor = await reddit.redditor(user)
+                            redditor.message(
                                 f'Watcher {watcher_id}: {subreddit_name}',
                                 f'Notification for post: {submission.permalink}\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
                             )
