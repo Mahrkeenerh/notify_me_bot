@@ -19,6 +19,6 @@ with open('config.json') as config_file:
 
 for watch in data['watch_list']:
     cursor.execute(
-        f'INSERT INTO watchers (username, subreddit, keywords) VALUES (%s, %s, %s)'
+        f'INSERT INTO watchers (username, subreddit, keywords) VALUES (%s, %s, %s)',
         (watch[1].lower(), watch[0].lower(), ", ".join(watch[2]))
     )
