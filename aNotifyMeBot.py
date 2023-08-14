@@ -298,7 +298,7 @@ async def check_subreddits(my_id):
                         if str(submission.author) != user and check_keywords(keywords, lowercase_body, lowercase_title):
                             save_time()
                             redditor = await reddit.redditor(user)
-                            redditor.message(
+                            await redditor.message(
                                 f'Watcher {watcher_id}: {subreddit_name}',
                                 f'Notification for post: {submission.permalink}\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
                             )
