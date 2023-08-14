@@ -76,7 +76,7 @@ def get_subreddit(subject):
     if subject in ['post reply', 'comment reply', 'username mention']:
         return 'comment'
 
-    return subject.replace('r/', '').strip()
+    return subject.replace('r/', '').strip().lower()
 
 
 async def create_watcher(mention, subreddit):
@@ -94,7 +94,7 @@ async def create_watcher(mention, subreddit):
         watch_list[subreddit] = {}
         requires_restart = True
 
-    str_author = str(mention.author)
+    str_author = str(mention.author).lower()
     cursor.execute(
         f'INSERT INTO watchers (username, subreddit, keywords) VALUES (%s, %s, %s) RETURNING watcher_id',
         (str_author, subreddit, keywords)
@@ -117,21 +117,32 @@ async def create_watcher(mention, subreddit):
     await mention.reply(f'New watcher created. ID: {watcher_id}\n\nSubreddit: {subreddit}\n\nKeywords: {keywords}\n\nKeyword count: {len(keywords.split(","))}')
 
 
-async def cancel(mention, subject):
+async def cancel_outer(mention):
+    ids = [i.strip() for i in mention.body.replace('!cancel', '').strip().split(',')]
+
+    responses = ['**Responses:**']
+    for id in ids:
+        response = await cancel(mention, id)
+        responses.append(response)
+
+    await mention.reply('\n\n---\n\n'.join(responses) + '\n\n---')
+
+
+async def cancel(mention, id):
+    global active_sub_id
+
     try:
-        id = int(mention.body.replace('!cancel', '').strip())
+        id = int(id)
     except ValueError:
-        await mention.reply('Sorry, but the id must be a number.')
+        return 'Sorry, but the ID must be a number.'
 
     if id not in watcher_sub_map:
-        await mention.reply('Sorry, but the id is invalid.')
-        return
+        return 'Sorry, but the ID is invalid.'
 
-    str_author = str(mention.author)
+    str_author = str(mention.author).lower()
 
-    if user_watcher_map[str_author] and id not in user_watcher_map[str_author]:
-        await mention.reply('Sorry, but you don\'t have permission to cancel this watcher.')
-        return
+    if str_author in user_watcher_map and id not in user_watcher_map[str_author]:
+        return 'Sorry, but you don\'t have permission to cancel this watcher.'
 
     cursor.execute(
         f'DELETE FROM watchers WHERE watcher_id = {id}',
@@ -145,8 +156,6 @@ async def cancel(mention, subject):
     if len(user_watcher_map[str_author]) == 0:
         del user_watcher_map[str_author]
 
-    await mention.reply(f'Watcher {id} was deleted.')
-
     # remove subreddit if no watchers
     if not watch_list[subreddit]:
         del watch_list[subreddit]
@@ -155,9 +164,11 @@ async def cancel(mention, subject):
         active_sub_id += 1
         asyncio.create_task(check_subreddits(active_sub_id))
 
+    return f'Watcher {id} canceled.'
+
 
 async def list_watchers(mention):
-    str_author = str(mention.author)
+    str_author = str(mention.author).lower()
     if str_author not in user_watcher_map:
         await mention.reply('Sorry, but you don\'t have any active watchers.')
         return
@@ -203,12 +214,12 @@ async def check_inbox():
                     if mention.body.lower().startswith('!advanced'):
                         subreddit = get_subreddit(subject.replace('!advanced', ''))
 
-                        await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [update](TODO) for more info.')
+                        await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
                         continue
 
                     # cancel by id
                     if mention.body.lower().startswith('!cancel'):
-                        await cancel(mention, subject)
+                        await cancel_outer(mention)
                         continue
 
                     # list
@@ -222,7 +233,7 @@ async def check_inbox():
                 # comments
                 subreddit = get_subreddit(subject)
                 if subreddit == 'comment':
-                    await mention.reply('I don\'t respond to comments anymore.\n\nCheck [update](TODO) for more info.')
+                    await mention.reply('I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
                     continue
 
                 # not public
@@ -288,7 +299,7 @@ async def check_subreddits(my_id):
                             save_time()
                             reddit.redditor(author).message(
                                 f'Watcher {watcher_id}: {subreddit_name}',
-                                f'Notification for post: {submission.permalink}\n\nTo cancel, check [update](TODO) for info. Simple cancelation will be added soon.'
+                                f'Notification for post: {submission.permalink}\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
                             )
 
         # reddit is not responding or something, idk, error - wait, try again
