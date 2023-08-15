@@ -300,7 +300,7 @@ async def check_subreddits(my_id):
                             redditor = await reddit.redditor(user)
                             await redditor.message(
                                 f'Watcher {watcher_id}: {subreddit_name}',
-                                f'Notification for post: {submission.permalink}\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
+                                f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
                             )
 
         # reddit is not responding or something, idk, error - wait, try again
