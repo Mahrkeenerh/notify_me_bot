@@ -301,14 +301,14 @@ async def check_subreddits(my_id):
                             save_time()
                             responded_to.add(user)
 
-                            async def respond():
+                            async def respond(user, watcher_id):
                                 redditor = await reddit.redditor(user)
                                 await redditor.message(
                                     f'Watcher {watcher_id}: {subreddit_name}',
                                     f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
                                 )
 
-                            asyncio.create_task(respond())
+                            asyncio.create_task(respond(user, watcher_id))
 
 
         # reddit is not responding or something, idk, error - wait, try again
