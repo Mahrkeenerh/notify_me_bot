@@ -170,7 +170,7 @@ async def cancel(mention, id):
 async def list_watchers(mention):
     str_author = str(mention.author).lower()
     if str_author not in user_watcher_map:
-        await mention.reply('Sorry, but you don\'t have any active watchers.')
+        await mention.reply('You don\'t have any active watchers.')
         return
 
     watchers = user_watcher_map[str_author]
@@ -293,11 +293,14 @@ async def check_subreddits(my_id):
                     lowercase_body = str(submission.selftext).lower()
                     subreddit_name = str(submission.subreddit).lower()
 
+                    responded_to = set()
+
                     # loop through all watch lists
                     for watcher_id, (user, keywords) in watch_list[subreddit_name].items():
-                        if str(submission.author) != user and check_keywords(keywords, lowercase_body, lowercase_title):
+                        if str(submission.author) != user and user not in responded_to and check_keywords(keywords, lowercase_body, lowercase_title):
                             save_time()
                             redditor = await reddit.redditor(user)
+                            responded_to.add(user)
                             await redditor.message(
                                 f'Watcher {watcher_id}: {subreddit_name}',
                                 f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
@@ -350,6 +353,8 @@ async def main():
             username=config_json['userN'],
             password=config_json['userP']
         )
+
+        reddit.config.ratelimit_seconds = 300
 
     build_watch_list()
 
