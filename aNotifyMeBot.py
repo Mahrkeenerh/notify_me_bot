@@ -200,50 +200,54 @@ async def check_inbox():
                 new_mentions.append(mention)
                 lowercase_body = mention.body.lower()
 
-                # it's a response
-                if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'): 
-                    continue
-
-                subject = mention.subject.replace('re:', '').strip().replace('notify_me_bot:', '').strip()
-
-                # TODO catch replies to cancel
-
-                # it's a command
-                if subject.startswith('!'):
-                    # create advanced
-                    if mention.body.lower().startswith('!advanced'):
-                        subreddit = get_subreddit(subject.replace('!advanced', ''))
-
-                        await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
+                try:
+                    # it's a response
+                    if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'): 
                         continue
 
-                    # cancel by id
-                    if mention.body.lower().startswith('!cancel'):
-                        await cancel_outer(mention)
+                    subject = mention.subject.replace('re:', '').strip().replace('notify_me_bot:', '').strip()
+
+                    # TODO catch replies to cancel
+
+                    # it's a command
+                    if subject.startswith('!'):
+                        # create advanced
+                        if mention.body.lower().startswith('!advanced'):
+                            subreddit = get_subreddit(subject.replace('!advanced', ''))
+
+                            await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
+                            continue
+
+                        # cancel by id
+                        if mention.body.lower().startswith('!cancel'):
+                            await cancel_outer(mention)
+                            continue
+
+                        # list
+                        if mention.body.lower().startswith('!list'):
+                            await list_watchers(mention)
+                            continue
+
+                        await mention.reply('Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)')
                         continue
 
-                    # list
-                    if mention.body.lower().startswith('!list'):
-                        await list_watchers(mention)
+                    # comments
+                    subreddit = get_subreddit(subject)
+                    if subreddit == 'comment':
+                        await mention.reply('I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
                         continue
 
-                    await mention.reply('Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)')
-                    continue
+                    # not public
+                    if not await sub_public(subreddit):
+                        await mention.reply('Sorry, but the requested subreddit is not public, or doesn\'t exist.')
+                        continue
 
-                # comments
-                subreddit = get_subreddit(subject)
-                if subreddit == 'comment':
-                    await mention.reply('I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
+                    # create simple watcher
+                    await create_watcher(mention, subreddit)
                     continue
-
-                # not public
-                if not await sub_public(subreddit):
-                    await mention.reply('Sorry, but the requested subreddit is not public, or doesn\'t exist.')
-                    continue
-
-                # create simple watcher
-                await create_watcher(mention, subreddit)
-                continue
+                
+                except asyncpraw.exceptions.RedditAPIException:
+                    log_error('Error sending message', mention.author, mention.subject, mention.body)
 
             await reddit.inbox.mark_read(new_mentions)
             await asyncio.sleep(10)
@@ -303,10 +307,13 @@ async def check_subreddits(my_id):
 
                             async def respond(user, watcher_id):
                                 redditor = await reddit.redditor(user)
-                                await redditor.message(
-                                    f'Watcher {watcher_id}: {subreddit_name}',
-                                    f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
-                                )
+                                try:
+                                    await redditor.message(
+                                        f'Watcher {watcher_id}: {subreddit_name}',
+                                        f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
+                                    )
+                                except asyncpraw.exceptions.RedditAPIException:
+                                    log_error('Error sending message', user, watcher_id, subreddit_name, submission.permalink)
 
                             asyncio.create_task(respond(user, watcher_id))
 
