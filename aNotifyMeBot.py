@@ -307,7 +307,7 @@ async def check_subreddits(my_id):
                             directs_queue.append({
                                 'user': user,
                                 'subject': f'Watcher {watcher_id}: {subreddit_name}',
-                                'message': f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for info. Simple cancelation will be added soon.\n\nKeywords: {", ".join(keywords)}'
+                                'message': f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo stop this watcher, reply cancel.\n\nKeywords: {", ".join(keywords)}'
                             })
 
         # reddit is not responding or something, idk, error - wait, try again
