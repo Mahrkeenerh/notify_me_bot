@@ -136,11 +136,11 @@ def cancel_outer(mention):
     mentions_queue.append({'mention': mention, 'message': '\n\n---\n\n'.join(responses) + '\n\n---'})
 
 
-def cancel(mention, id):
+def cancel(mention, str_id):
     global active_sub_id
 
     try:
-        id = int(id)
+        id = int(str_id)
     except ValueError:
         return 'The ID must be a number.'
 
