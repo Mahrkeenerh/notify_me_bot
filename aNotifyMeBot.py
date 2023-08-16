@@ -120,7 +120,7 @@ def cancel_outer(mention):
     ids = [i.strip() for i in mention.body.replace('!', '').replace('cancel', '').strip().split(',')]
 
     if len(ids) == 1 and ids[0] == 'all':
-        ids = user_watcher_map[str(mention.author).lower()]
+        ids = list(user_watcher_map[str(mention.author).lower()])
 
     responses = [f'**Response{"s" if len(ids) > 1 else ""}:**']
     for id in ids:
@@ -136,11 +136,11 @@ def cancel_outer(mention):
     mentions_queue.append({'mention': mention, 'message': '\n\n---\n\n'.join(responses) + '\n\n---'})
 
 
-def cancel(mention, str_id):
+def cancel(mention, id):
     global active_sub_id
 
     try:
-        id = int(str_id)
+        id = int(id)
     except ValueError:
         return 'The ID must be a number.'
 
