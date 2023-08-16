@@ -82,7 +82,7 @@ def get_subreddit(subject):
     return subject.replace('r/', '').strip().lower()
 
 
-async def create_watcher(mention, subreddit):
+def create_watcher(mention, subreddit):
     global active_sub_id
 
     keywords = [i.strip() for i in mention.body.lower().strip().split(',')]
@@ -116,7 +116,7 @@ async def create_watcher(mention, subreddit):
     mentions_queue.append({'mention': mention, 'message': f'New watcher created. ID: {watcher_id}\n\nSubreddit: {subreddit}\n\nKeywords: {", ".join(keywords)}\n\nKeyword count: {len(keywords)}'})
 
 
-async def cancel_outer(mention):
+def cancel_outer(mention):
     ids = [i.strip() for i in mention.body.replace('!', '').replace('cancel', '').strip().split(',')]
 
     if len(ids) == 1 and ids[0] == 'all':
@@ -124,19 +124,19 @@ async def cancel_outer(mention):
 
     responses = [f'**Response{"s" if len(ids) > 1 else ""}:**']
     for id in ids:
-        response = await cancel(mention, id)
+        response = cancel(mention, id)
         responses.append(response)
 
     # no ids, get id from subject
     if len(ids) == 0:
         id = mention.subject.replace('re:', '').replace('watcher', '').lower().split(':')[0].strip()
-        response = await cancel(mention, id)
+        response = cancel(mention, id)
         responses.append(response)
 
     mentions_queue.append({'mention': mention, 'message': '\n\n---\n\n'.join(responses) + '\n\n---'})
 
 
-async def cancel(mention, id):
+def cancel(mention, id):
     global active_sub_id
 
     try:
@@ -175,7 +175,7 @@ async def cancel(mention, id):
     return f'Watcher {id} canceled.'
 
 
-async def list_watchers(mention):
+def list_watchers(mention):
     str_author = str(mention.author).lower()
     if str_author not in user_watcher_map:
         mentions_queue.append({'mention': mention, 'message': 'You don\'t have any active watchers.'})
@@ -222,12 +222,12 @@ async def check_inbox():
 
                 # cancel
                 if lowercase_body.startswith('!cancel') or lowercase_body.startswith('cancel'):
-                    await cancel_outer(mention)
+                    cancel_outer(mention)
                     continue
 
                 # list
                 if lowercase_body.startswith('!list'):
-                    await list_watchers(mention)
+                    list_watchers(mention)
                     continue
 
                 # unknown command
@@ -247,7 +247,7 @@ async def check_inbox():
                     continue
 
                 # create simple watcher
-                await create_watcher(mention, subreddit)
+                create_watcher(mention, subreddit)
                 continue
 
             await reddit.inbox.mark_read(new_mentions)
