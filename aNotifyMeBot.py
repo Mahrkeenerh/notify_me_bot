@@ -338,7 +338,7 @@ async def handle_mention_queue():
     while True:
         pos = 0
 
-        if len(mentions_queue) != 0:
+        if len(mentions_queue) > 10:
             log_message('Mention queue length:', len(mentions_queue))
 
         while mentions_queue and pos < len(mentions_queue):
@@ -361,14 +361,14 @@ async def handle_mention_queue():
                     pos -= 1
                     log_error('Canceled message', mentions_queue[pos - 1]['mention'].author, mentions_queue[pos - 1]['mention'].subject, mentions_queue[pos - 1]['message'])
 
-        await asyncio.sleep(10)
+        await asyncio.sleep(1)
 
 
 async def handle_direct_queue():
     while True:
         pos = 0
 
-        if len(directs_queue) != 0:
+        if len(directs_queue) > 10:
             log_message('Direct queue length:', len(directs_queue))
 
         while directs_queue and pos < len(directs_queue):
@@ -392,7 +392,7 @@ async def handle_direct_queue():
                     pos -= 1
                     log_error('Canceled message', directs_queue[pos - 1]['user'], directs_queue[pos - 1]['subject'], directs_queue[pos - 1]['message'])
 
-        await asyncio.sleep(10)
+        await asyncio.sleep(1)
 
 
 async def main():
