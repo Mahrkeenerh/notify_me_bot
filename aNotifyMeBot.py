@@ -20,6 +20,9 @@ watcher_sub_map = {}
 user_watcher_map = {}
 active_sub_id = 0
 
+mentions_queue = []
+directs_queue = []
+
 
 def log_error(*args):
     print(f'\n{datetime.datetime.now()}')
@@ -110,7 +113,7 @@ async def create_watcher(mention, subreddit):
         active_sub_id += 1
         asyncio.create_task(check_subreddits(active_sub_id))
 
-    await mention.reply(f'New watcher created. ID: {watcher_id}\n\nSubreddit: {subreddit}\n\nKeywords: {", ".join(keywords)}\n\nKeyword count: {len(keywords)}')
+    mentions_queue.append({'mention': mention, 'message': f'New watcher created. ID: {watcher_id}\n\nSubreddit: {subreddit}\n\nKeywords: {", ".join(keywords)}\n\nKeyword count: {len(keywords)}'})
 
 
 async def cancel_outer(mention):
@@ -130,7 +133,7 @@ async def cancel_outer(mention):
         response = await cancel(mention, id)
         responses.append(response)
 
-    await mention.reply('\n\n---\n\n'.join(responses) + '\n\n---')
+    mentions_queue.append({'mention': mention, 'message': '\n\n---\n\n'.join(responses) + '\n\n---'})
 
 
 async def cancel(mention, id):
@@ -175,7 +178,7 @@ async def cancel(mention, id):
 async def list_watchers(mention):
     str_author = str(mention.author).lower()
     if str_author not in user_watcher_map:
-        await mention.reply('You don\'t have any active watchers.')
+        mentions_queue.append({'mention': mention, 'message': 'You don\'t have any active watchers.'})
         return
 
     watchers = user_watcher_map[str_author]
@@ -187,7 +190,7 @@ async def list_watchers(mention):
 
     message += '---'
 
-    await mention.reply(message)
+    mentions_queue.append({'mention': mention, 'message': message})
 
 
 async def check_inbox():
@@ -205,54 +208,49 @@ async def check_inbox():
                 new_mentions.append(mention)
                 lowercase_body = mention.body.lower()
 
-                try:
-                    # it's a response
-                    if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'):
-                        continue
-
-                    subject = mention.subject.replace('re:', '').strip().lower()
-
-                    # TODO catch replies to cancel
-
-                    # create advanced
-                    if lowercase_body.startswith('!advanced'):
-                        subreddit = get_subreddit(subject.replace('!advanced', ''))
-
-                        await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
-                        continue
-
-                    # cancel
-                    if lowercase_body.startswith('!cancel') or lowercase_body.startswith('cancel'):
-                        await cancel_outer(mention)
-                        continue
-
-                    # list
-                    if lowercase_body.startswith('!list'):
-                        await list_watchers(mention)
-                        continue
-
-                    # unknown command
-                    if lowercase_body.startswith('!'):
-                        await mention.reply('Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)')
-                        continue
-
-                    # comments
-                    subreddit = get_subreddit(subject)
-                    if subreddit == 'comment':
-                        await mention.reply('I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
-                        continue
-
-                    # not public
-                    if not await sub_public(subreddit):
-                        await mention.reply('Sorry, but the requested subreddit is not public, or doesn\'t exist.')
-                        continue
-
-                    # create simple watcher
-                    await create_watcher(mention, subreddit)
+                # it's a response
+                if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'):
                     continue
-                
-                except asyncpraw.exceptions.RedditAPIException:
-                    log_error('Error sending message', mention.author, mention.subject, mention.body)
+
+                subject = mention.subject.replace('re:', '').strip().lower()
+
+                # TODO catch replies to cancel
+
+                # create advanced
+                if lowercase_body.startswith('!advanced'):
+                    subreddit = get_subreddit(subject.replace('!advanced', ''))
+                    mentions_queue.append({'mention': mention, 'message': 'Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.'})
+                    continue
+
+                # cancel
+                if lowercase_body.startswith('!cancel') or lowercase_body.startswith('cancel'):
+                    await cancel_outer(mention)
+                    continue
+
+                # list
+                if lowercase_body.startswith('!list'):
+                    await list_watchers(mention)
+                    continue
+
+                # unknown command
+                if lowercase_body.startswith('!'):
+                    mentions_queue.append({'mention': mention, 'message': 'Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)'})
+                    continue
+
+                # comments
+                subreddit = get_subreddit(subject)
+                if subreddit == 'comment':
+                    mentions_queue.append({'mention': mention, 'message': 'I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.'})
+                    continue
+
+                # not public
+                if not await sub_public(subreddit):
+                    mentions_queue.append({'mention': mention, 'message': 'Sorry, but the requested subreddit is not public, or doesn\'t exist.'})
+                    continue
+
+                # create simple watcher
+                await create_watcher(mention, subreddit)
+                continue
 
             await reddit.inbox.mark_read(new_mentions)
             await asyncio.sleep(10)
@@ -308,18 +306,11 @@ async def check_subreddits(my_id):
                         if str(submission.author) != user and user not in responded_to and check_keywords(keywords, lowercase_body, lowercase_title):
                             save_time()
                             responded_to.add(user)
-
-                            async def respond(watcher_id, user, keywords, submission):
-                                redditor = await reddit.redditor(user)
-                                try:
-                                    await redditor.message(
-                                        f'Watcher {watcher_id}: {subreddit_name}',
-                                        f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.\n\nKeywords: {", ".join(keywords)}'
-                                    )
-                                except asyncpraw.exceptions.RedditAPIException:
-                                    log_error('Error sending message', user, watcher_id, subreddit_name, submission.permalink)
-
-                            asyncio.create_task(respond(watcher_id, user, keywords, submission))
+                            directs_queue.append({
+                                'user': user,
+                                'subject': f'Watcher {watcher_id}: {subreddit_name}',
+                                'message': f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.\n\nKeywords: {", ".join(keywords)}'
+                            })
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
@@ -343,6 +334,67 @@ def build_watch_list():
             user_watcher_map[author] = set()
 
         user_watcher_map[author].add(watcher_id)        
+
+
+async def handle_mention_queue():
+    while True:
+        pos = 0
+
+        if len(mentions_queue) != 0:
+            log_message('Mention queue length:', len(mentions_queue))
+
+        while mentions_queue and pos < len(mentions_queue):
+            try:
+                pos += 1
+                if 'c' not in mentions_queue[pos - 1]:
+                    mentions_queue[pos - 1]['c'] = 0
+
+                await mentions_queue[pos - 1]['mention'].reply(mentions_queue[pos - 1]['message'])
+                mentions_queue.pop(pos - 1)
+                pos -= 1
+
+            except asyncpraw.exceptions.RedditAPIException:
+                if 'RATELIMIT' in ''.join(traceback.format_exception(*sys.exc_info())):
+                    continue
+
+                mentions_queue[pos - 1]['c'] += 1
+                if mentions_queue[pos - 1]['c'] > 3:
+                    mentions_queue.pop(pos - 1)
+                    pos -= 1
+                    log_error('Canceled message', mentions_queue[pos - 1]['mention'].author, mentions_queue[pos - 1]['mention'].subject, mentions_queue[pos - 1]['message'])
+
+        await asyncio.sleep(10)
+
+
+async def handle_direct_queue():
+    while True:
+        pos = 0
+
+        if len(directs_queue) != 0:
+            log_message('Direct queue length:', len(directs_queue))
+
+        while directs_queue and pos < len(directs_queue):
+            try:
+                pos += 1
+                if 'c' not in directs_queue[pos - 1]:
+                    directs_queue[pos - 1]['c'] = 0
+
+                redditor = await reddit.redditor(directs_queue[pos - 1]['user'])
+                await redditor.message(directs_queue[pos - 1]['subject'], directs_queue[pos - 1]['message'])
+                directs_queue.pop(pos - 1)
+                pos -= 1
+
+            except asyncpraw.exceptions.RedditAPIException:
+                if 'RATELIMIT' in ''.join(traceback.format_exception(*sys.exc_info())):
+                    continue
+
+                directs_queue[pos - 1]['c'] += 1
+                if directs_queue[pos - 1]['c'] > 3:
+                    directs_queue.pop(pos - 1)
+                    pos -= 1
+                    log_error('Canceled message', directs_queue[pos - 1]['user'], directs_queue[pos - 1]['subject'], directs_queue[pos - 1]['message'])
+
+        await asyncio.sleep(10)
 
 
 async def main():
@@ -373,7 +425,7 @@ async def main():
 
     build_watch_list()
 
-    await asyncio.gather(check_inbox(), check_subreddits(0))
+    await asyncio.gather(check_inbox(), check_subreddits(0), handle_mention_queue(), handle_direct_queue())
 
 
 asyncio.run(main())
