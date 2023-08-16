@@ -82,11 +82,7 @@ def get_subreddit(subject):
 async def create_watcher(mention, subreddit):
     global active_sub_id
 
-    # if ';' in mention.body:
-    #     await mention.reply('Sorry, but I don\'t support \';\' in keywords.')
-    #     return
-
-    keywords = mention.body.lower().strip()
+    keywords = [i.strip() for i in mention.body.lower().strip().split(',')]
 
     requires_restart = False
     # add new subreddit to search
@@ -97,11 +93,11 @@ async def create_watcher(mention, subreddit):
     str_author = str(mention.author).lower()
     cursor.execute(
         f'INSERT INTO watchers (username, subreddit, keywords) VALUES (%s, %s, %s) RETURNING watcher_id',
-        (str_author, subreddit, keywords)
+        (str_author, subreddit, ', '.join(keywords))
     )
     watcher_id = cursor.fetchall()[0][0]
 
-    watch_list[subreddit][watcher_id] = [str_author, keywords.split(', ')]
+    watch_list[subreddit][watcher_id] = [str_author, keywords]
     watcher_sub_map[watcher_id] = subreddit
 
     if str_author not in user_watcher_map:
@@ -114,14 +110,23 @@ async def create_watcher(mention, subreddit):
         active_sub_id += 1
         asyncio.create_task(check_subreddits(active_sub_id))
 
-    await mention.reply(f'New watcher created. ID: {watcher_id}\n\nSubreddit: {subreddit}\n\nKeywords: {keywords}\n\nKeyword count: {len(keywords.split(","))}')
+    await mention.reply(f'New watcher created. ID: {watcher_id}\n\nSubreddit: {subreddit}\n\nKeywords: {", ".join(keywords)}\n\nKeyword count: {len(keywords)}')
 
 
 async def cancel_outer(mention):
-    ids = [i.strip() for i in mention.body.replace('!cancel', '').strip().split(',')]
+    ids = [i.strip() for i in mention.body.replace('!', '').replace('cancel', '').strip().split(',')]
 
-    responses = ['**Responses:**']
+    if len(ids) == 1 and ids[0] == 'all':
+        ids = user_watcher_map[str(mention.author).lower()]
+
+    responses = [f'**Response{"s" if len(ids) > 1 else ""}:**']
     for id in ids:
+        response = await cancel(mention, id)
+        responses.append(response)
+
+    # no ids, get id from subject
+    if len(ids) == 0:
+        id = mention.subject.replace('re:', '').replace('watcher', '').lower().split(':')[0].strip()
         response = await cancel(mention, id)
         responses.append(response)
 
@@ -134,15 +139,15 @@ async def cancel(mention, id):
     try:
         id = int(id)
     except ValueError:
-        return 'Sorry, but the ID must be a number.'
+        return 'The ID must be a number.'
 
     if id not in watcher_sub_map:
-        return 'Sorry, but the ID is invalid.'
+        return 'Invalid ID.'
 
     str_author = str(mention.author).lower()
 
     if str_author in user_watcher_map and id not in user_watcher_map[str_author]:
-        return 'Sorry, but you don\'t have permission to cancel this watcher.'
+        return 'You don\'t have permission to cancel this watcher.'
 
     cursor.execute(
         f'DELETE FROM watchers WHERE watcher_id = {id}',
@@ -202,32 +207,32 @@ async def check_inbox():
 
                 try:
                     # it's a response
-                    if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'): 
+                    if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'):
                         continue
 
-                    subject = mention.subject.replace('re:', '').strip().replace('notify_me_bot:', '').strip()
+                    subject = mention.subject.replace('re:', '').strip().lower()
 
                     # TODO catch replies to cancel
 
-                    # it's a command
-                    if subject.startswith('!'):
-                        # create advanced
-                        if mention.body.lower().startswith('!advanced'):
-                            subreddit = get_subreddit(subject.replace('!advanced', ''))
+                    # create advanced
+                    if lowercase_body.startswith('!advanced'):
+                        subreddit = get_subreddit(subject.replace('!advanced', ''))
 
-                            await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
-                            continue
+                        await mention.reply('Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.')
+                        continue
 
-                        # cancel by id
-                        if mention.body.lower().startswith('!cancel'):
-                            await cancel_outer(mention)
-                            continue
+                    # cancel
+                    if lowercase_body.startswith('!cancel') or lowercase_body.startswith('cancel'):
+                        await cancel_outer(mention)
+                        continue
 
-                        # list
-                        if mention.body.lower().startswith('!list'):
-                            await list_watchers(mention)
-                            continue
+                    # list
+                    if lowercase_body.startswith('!list'):
+                        await list_watchers(mention)
+                        continue
 
+                    # unknown command
+                    if lowercase_body.startswith('!'):
                         await mention.reply('Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)')
                         continue
 
@@ -259,7 +264,6 @@ async def check_inbox():
 
 
 def check_keywords(keywords, lowercase_body, lowercase_title):
-
     reply = False
 
     for keyword in keywords:
@@ -305,18 +309,17 @@ async def check_subreddits(my_id):
                             save_time()
                             responded_to.add(user)
 
-                            async def respond(user, watcher_id):
+                            async def respond(watcher_id, user, keywords, submission):
                                 redditor = await reddit.redditor(user)
                                 try:
                                     await redditor.message(
                                         f'Watcher {watcher_id}: {subreddit_name}',
-                                        f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.'
+                                        f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.\n\nKeywords: {", ".join(keywords)}'
                                     )
                                 except asyncpraw.exceptions.RedditAPIException:
                                     log_error('Error sending message', user, watcher_id, subreddit_name, submission.permalink)
 
-                            asyncio.create_task(respond(user, watcher_id))
-
+                            asyncio.create_task(respond(watcher_id, user, keywords, submission))
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
@@ -366,7 +369,7 @@ async def main():
             password=config_json['userP']
         )
 
-        reddit.config.ratelimit_seconds = 300
+        reddit.config.ratelimit_seconds = 60
 
     build_watch_list()
 
