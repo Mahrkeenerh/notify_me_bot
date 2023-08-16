@@ -214,12 +214,10 @@ async def check_inbox():
 
                 subject = mention.subject.replace('re:', '').strip().lower()
 
-                # TODO catch replies to cancel
-
                 # create advanced
                 if lowercase_body.startswith('!advanced'):
                     subreddit = get_subreddit(subject.replace('!advanced', ''))
-                    mentions_queue.append({'mention': mention, 'message': 'Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.'})
+                    mentions_queue.append({'mention': mention, 'message': 'Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for more info.'})
                     continue
 
                 # cancel
@@ -234,13 +232,13 @@ async def check_inbox():
 
                 # unknown command
                 if lowercase_body.startswith('!'):
-                    mentions_queue.append({'mention': mention, 'message': 'Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [info_post](https://www.reddit.com/user/notify_me_bot/comments/mu01zx/introducing_myself/)'})
+                    mentions_queue.append({'mention': mention, 'message': 'Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/)'})
                     continue
 
                 # comments
                 subreddit = get_subreddit(subject)
                 if subreddit == 'comment':
-                    mentions_queue.append({'mention': mention, 'message': 'I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for more info.'})
+                    mentions_queue.append({'mention': mention, 'message': 'I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for more info.'})
                     continue
 
                 # not public
@@ -309,7 +307,7 @@ async def check_subreddits(my_id):
                             directs_queue.append({
                                 'user': user,
                                 'subject': f'Watcher {watcher_id}: {subreddit_name}',
-                                'message': f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15ra4uf/rework_part_1/) for info. Simple cancelation will be added soon.\n\nKeywords: {", ".join(keywords)}'
+                                'message': f'Notification for post: [{submission.permalink}]({"https://reddit.com" + submission.permalink})\n\nTo cancel, check [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for info. Simple cancelation will be added soon.\n\nKeywords: {", ".join(keywords)}'
                             })
 
         # reddit is not responding or something, idk, error - wait, try again
