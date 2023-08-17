@@ -61,6 +61,8 @@ async def sub_public(subreddit_name):
             return True
     except asyncprawcore.exceptions.NotFound:
         return False
+    except asyncprawcore.exceptions.Forbidden:
+        return False
 
     return False
 
