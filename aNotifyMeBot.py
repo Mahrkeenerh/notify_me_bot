@@ -266,7 +266,7 @@ async def check_inbox():
                     continue
 
             await reddit.inbox.mark_read(new_mentions)
-            await asyncio.sleep(1)
+            await asyncio.sleep(10)
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
