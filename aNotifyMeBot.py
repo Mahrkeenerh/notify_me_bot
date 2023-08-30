@@ -121,6 +121,9 @@ def create_watcher(mention, subreddit):
 def cancel_outer(mention):
     ids = [i.strip() for i in mention.body.lower().replace('!', '').replace('cancel', '').strip().split(',')]
 
+    if len(ids) == 1 and ids[0] == '':
+        ids = []
+
     if len(ids) == 1 and ids[0] == 'all':
         ids = list(user_watcher_map[str(mention.author).lower()])
 
