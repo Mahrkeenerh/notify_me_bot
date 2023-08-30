@@ -210,50 +210,63 @@ async def check_inbox():
                 new_mentions.append(mention)
                 lowercase_body = mention.body.lower()
 
-                # it's a response
-                if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'):
+                try:
+
+                    # it's a response
+                    if not ('u/notify_me_bot' in lowercase_body or mention.subject != 'post reply'):
+                        continue
+
+                    subject = mention.subject.replace('re:', '').strip().lower()
+
+                    # create advanced
+                    if lowercase_body.startswith('!advanced'):
+                        subreddit = get_subreddit(subject.replace('!advanced', ''))
+                        mentions_queue.append({'mention': mention, 'message': 'Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for more info.'})
+                        continue
+
+                    # cancel
+                    if lowercase_body.startswith('!cancel') or lowercase_body.startswith('cancel'):
+                        cancel_outer(mention)
+                        continue
+
+                    # list
+                    if lowercase_body.startswith('!list'):
+                        list_watchers(mention)
+                        continue
+
+                    # unknown command
+                    if lowercase_body.startswith('!'):
+                        mentions_queue.append({'mention': mention, 'message': 'Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/)'})
+                        continue
+
+                    # comments
+                    subreddit = get_subreddit(subject)
+                    if subreddit == 'comment':
+                        mentions_queue.append({'mention': mention, 'message': 'I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for more info.'})
+                        continue
+
+                    # not public
+                    if not await sub_public(subreddit):
+                        mentions_queue.append({'mention': mention, 'message': 'Sorry, but the requested subreddit is not public, or doesn\'t exist.'})
+                        continue
+
+                    # create simple watcher
+                    create_watcher(mention, subreddit)
                     continue
 
-                subject = mention.subject.replace('re:', '').strip().lower()
-
-                # create advanced
-                if lowercase_body.startswith('!advanced'):
-                    subreddit = get_subreddit(subject.replace('!advanced', ''))
-                    mentions_queue.append({'mention': mention, 'message': 'Nice catch, but this feature is not implemented yet.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for more info.'})
+                # some error, send message, continue
+                except:
+                    log_error('En error occured with inbox')
+                    mentions_queue.append({'mention': mention, 'message': 'Sorry, I couldn\'t process your request.\n\nMy creator has been notified.'})
+                    directs_queue.append({
+                        'user': 'Mahrkeenerh1',
+                        'subject': 'Error',
+                        'message': f'Error occured with inbox\n\n{traceback.print_exception(*sys.exc_info())}'
+                    })
                     continue
-
-                # cancel
-                if lowercase_body.startswith('!cancel') or lowercase_body.startswith('cancel'):
-                    cancel_outer(mention)
-                    continue
-
-                # list
-                if lowercase_body.startswith('!list'):
-                    list_watchers(mention)
-                    continue
-
-                # unknown command
-                if lowercase_body.startswith('!'):
-                    mentions_queue.append({'mention': mention, 'message': 'Sorry, I don\'t understand this command. Check if you have a typo or contact my creator [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/)'})
-                    continue
-
-                # comments
-                subreddit = get_subreddit(subject)
-                if subreddit == 'comment':
-                    mentions_queue.append({'mention': mention, 'message': 'I don\'t respond to comments anymore.\n\nCheck [REWORK](https://www.reddit.com/user/notify_me_bot/comments/15skw1b/rework_part_2/) for more info.'})
-                    continue
-
-                # not public
-                if not await sub_public(subreddit):
-                    mentions_queue.append({'mention': mention, 'message': 'Sorry, but the requested subreddit is not public, or doesn\'t exist.'})
-                    continue
-
-                # create simple watcher
-                create_watcher(mention, subreddit)
-                continue
 
             await reddit.inbox.mark_read(new_mentions)
-            await asyncio.sleep(10)
+            await asyncio.sleep(1)
 
         # reddit is not responding or something, idk, error - wait, try again
         except:
