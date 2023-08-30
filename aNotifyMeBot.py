@@ -119,7 +119,7 @@ def create_watcher(mention, subreddit):
 
 
 def cancel_outer(mention):
-    ids = [i.strip() for i in mention.body.replace('!', '').replace('cancel', '').strip().split(',')]
+    ids = [i.strip() for i in mention.body.lower().replace('!', '').replace('cancel', '').strip().split(',')]
 
     if len(ids) == 1 and ids[0] == 'all':
         ids = list(user_watcher_map[str(mention.author).lower()])
@@ -131,7 +131,7 @@ def cancel_outer(mention):
 
     # no ids, get id from subject
     if len(ids) == 0:
-        id = mention.subject.replace('re:', '').replace('watcher', '').lower().split(':')[0].strip()
+        id = mention.subject.lower().replace('re:', '').replace('watcher', '').lower().split(':')[0].strip()
         response = cancel(mention, id)
         responses.append(response)
 
