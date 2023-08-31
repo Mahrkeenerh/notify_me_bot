@@ -336,7 +336,7 @@ async def check_subreddits(my_id):
 
 def build_watch_list():
     cursor.execute(
-        f'SELECT watcher_id, username, subreddit, keywords FROM watchers',
+        f'SELECT watcher_id, username, subreddit, keywords FROM watchers ORDER BY watcher_id',
     )
 
     for watcher_id, author, subreddit, keywords in cursor.fetchall():
